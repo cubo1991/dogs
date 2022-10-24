@@ -1,12 +1,12 @@
 const { Router } = require('express');
-const RazaRoute = require('./raza')
-const TemperamentoRoute = require('./temperamento')
+const DogRoute = require('./dog')
+const TemperamentoRoute = require('./temperaments')
 
 
 const router = Router();
 
-router.use('/raza', RazaRoute);
-router.use('/temperamento', TemperamentoRoute)
+router.use('/dog', DogRoute);
+router.use('/temperaments', TemperamentoRoute)
 
 
 module.exports = router;

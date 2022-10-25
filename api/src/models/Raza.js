@@ -7,25 +7,29 @@ module.exports = (sequelize) => {
     ID: {
       type: DataTypes.UUID,
       primaryKey: true,
-      notNull: true
+      allowNull: false,
+      defaultValue: DataTypes.UUIDV4
     },
-    Nombre: {
+    Name: {
       type: DataTypes.STRING,
-      notNull: true
+      allowNull: false,
       
     },
-    Altura: {
+    Height: {
         type: DataTypes.INTEGER,
-        notNull: true
+        allowNull: false,
     },
-    Peso: {
+    Weight: {
         type: DataTypes.INTEGER,
-        notNull: true
+        allowNull: false,
 
     },
-    Años_De_Vida: {
+    Life_span: {
         type: DataTypes.INTEGER
 
     }
+  },
+  {
+    timestaps: false
   });
 };

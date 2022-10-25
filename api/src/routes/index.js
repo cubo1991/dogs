@@ -1,11 +1,11 @@
 const { Router } = require('express');
-const DogRoute = require('./dog')
+const DogRoute = require('./dogs')
 const TemperamentoRoute = require('./temperaments')
 
 
 const router = Router();
 
-router.use('/dog', DogRoute);
+router.use('/dogs', DogRoute);
 router.use('/temperaments', TemperamentoRoute)
 
 

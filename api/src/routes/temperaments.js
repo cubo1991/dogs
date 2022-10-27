@@ -1,5 +1,6 @@
 const axios = require('axios');
 const { Router } = require('express');
+const { Temperamento } = require('../db')
 
 
 
@@ -21,23 +22,30 @@ router.get('/', async (req,res, next) =>{
               let setTemperamentos = new Set(strTemperamentos)
               let arrayTemperamentos = Array.from(setTemperamentos)
               let nuevoTemperamentos = []; 
-     
-            for (let i = 0; i < arrayTemperamentos.length; i++) {
-                
-                if(arrayTemperamentos[i][0] === " "){
-                            arrayTemperamentos[i][0].shift                            
-                            nuevoTemperamentos.push(arrayTemperamentos[i])
-                        }
-                        else {nuevoTemperamentos.push(arrayTemperamentos[i])}
-              }                  
-            
-		        
+              let tempbd = await Temperamento.findAll()
+           
+              if(tempbd.length < 1)
+              {
 
+                  for (let i = 0; i < arrayTemperamentos.length; i++) {
+                      
+                      if(arrayTemperamentos[i][0] === " "){
+                                  arrayTemperamentos[i][0].shift                            
+                                  nuevoTemperamentos.push(arrayTemperamentos[i])
+                              }
+                              else {nuevoTemperamentos.push(arrayTemperamentos[i])}
+                    }                  
+                    for (let i = 0; i < nuevoTemperamentos.length; i++) { 
+                     await Temperamento.create({Name: nuevoTemperamentos[i] 
+      
+                    })}
+              }
           
-            
+          
+           
             
              
-              res.send(temperamentos)
+              res.send(tempbd)
                 } catch (error) {
                     console.log(error)
                 }

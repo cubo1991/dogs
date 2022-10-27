@@ -7,8 +7,10 @@ const router = Router();
 
 
 router.get('/', async (req, res, next) => {
-  
-   
+  const {name} = req.query
+  if(name){
+try {
+    
     let razaApis = axios.get('https://api.thedogapi.com/v1/breeds')
     let razaDB = Raza.findAll()
 
@@ -18,7 +20,7 @@ router.get('/', async (req, res, next) => {
     ])
     .then((respuesta) => {
         const [razaApis, razaDB] = respuesta   
-        console.log(razaApis)   
+        
         let razasdeApi  = razaApis.data.map((info) => {
             return {
                 ID: info.id,
@@ -35,8 +37,44 @@ router.get('/', async (req, res, next) => {
     
         res.send(razas)
     })
-     
+} catch (error) {
+    
+}
+} 
+  if(!name) {
+try {
+    
+    let razaApis = axios.get('https://api.thedogapi.com/v1/breeds')
+    let razaDB = Raza.findAll()
 
+    Promise.all([
+        razaApis,
+        razaDB
+    ])
+    .then((respuesta) => {
+        const [razaApis, razaDB] = respuesta   
+        
+        let razasdeApi  = razaApis.data.map((info) => {
+            return {
+                ID: info.id,
+                Name: info.name,
+                Height_max: Number(info.height.imperial.split(" - ")[1]),
+                Height_min: Number(info.height.imperial.split(" - ")[0]),
+                Weight_max: Number(info.weight.imperial.split(" - ")[1]),
+                Weight_min: Number(info.weight.imperial.split(" - ")[0]),                
+                Life_span:  Number(info.life_span.split(" - ")[0]),
+                img: info.image.url,                
+            }
+        })
+        let razas = [...razaDB, ...razasdeApi]
+    
+        res.send(razas)
+    })
+} catch (error) {
+    
+}
+  }
+   
 
 })
 

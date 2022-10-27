@@ -6,7 +6,8 @@ module.exports = (sequelize) => {
   sequelize.define('temperamento', {
     ID: {
       type: DataTypes.UUID,
-      primaryKey: true
+      primaryKey: true,
+      defaultValue: DataTypes.UUIDV4
     },
     Name: {
       type: DataTypes.STRING,

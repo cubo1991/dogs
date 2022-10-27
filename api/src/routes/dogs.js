@@ -7,66 +7,35 @@ const router = Router();
 
 
 router.get('/', async (req, res, next) => {
-    const { name } = req.query
-    const { idRaza } = req.params
+  
+   
+    let razaApis = axios.get('https://api.thedogapi.com/v1/breeds')
+    let razaDB = Raza.findAll()
 
-    // return Raza.findAll()
-    // .then((raza => {
-    //     res.send(raza)
-    // }))
-
-
-    if (!name && !idRaza) {
-
-        try {
-            let perros = []
-            Raza.findAll()
-                .then((raza => {
-                    perros.push(raza)
-                }))
-            let razaApis = await axios.get('https://api.thedogapi.com/v1/breeds');
-            console.log(razaApis.data)
-            let filtrado = razaApis.data.map((info) => {
-                return {
-                    // ID: info.id,
-                    id: info.id,
-                    heightMin: info.height.imperial.split(" - ")[0],
-                    heightMax: info.height.imperial.split(" - ")[1],
-                    weightMin: info.weight.imperial.split(" - ")[0],
-                    weightMax: info.weight.imperial.split(" - ")[1],
-                    life_span: info.life_span,
-                    img: info.image.url,
-                    temperament: info.temperament ? info.temperament.split(", ") : ""
-
-
-                }
-
-            })
-            perros.push(filtrado)
-            console.log(perros)
-            res.send(perros)
-        } catch (error) {
-            console.log(error)
-        }
-    }
-
-    // ESTO ME VA A SERVIR PARA EL GET /dogs/{idRaza}
-    if (name) {
-        try {
-            let razaApis = await axios.get('https://api.thedogapi.com/v1/breeds')
-            let busqueda = razaApis.data.filter(e => e.name === name)
-            if (busqueda) {
-                console.log(busqueda)
-                res.send(busqueda)
-            } else {
-                res.send("No está")
+    Promise.all([
+        razaApis,
+        razaDB
+    ])
+    .then((respuesta) => {
+        const [razaApis, razaDB] = respuesta   
+        console.log(razaApis)   
+        let razasdeApi  = razaApis.data.map((info) => {
+            return {
+                ID: info.id,
+                Name: info.name,
+                Height_max: Number(info.height.imperial.split(" - ")[1]),
+                Height_min: Number(info.height.imperial.split(" - ")[0]),
+                Weight_max: Number(info.weight.imperial.split(" - ")[1]),
+                Weight_min: Number(info.weight.imperial.split(" - ")[0]),                
+                Life_span:  Number(info.life_span.split(" - ")[0]),
+                img: info.image.url,                
             }
-
-        } catch (error) {
-            console.log(error)
-        }
-    }
-
+        })
+        let razas = [...razaDB, ...razasdeApi]
+    
+        res.send(razas)
+    })
+     
 
 
 })

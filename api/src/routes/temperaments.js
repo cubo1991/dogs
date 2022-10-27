@@ -4,6 +4,7 @@ const { Router } = require('express');
 
 
 
+
 const router = Router();
 
 router.get('/', async (req,res, next) =>{
@@ -30,13 +31,13 @@ router.get('/', async (req,res, next) =>{
                         else {nuevoTemperamentos.push(arrayTemperamentos[i])}
               }                  
             
-		        console.log(nuevoTemperamentos)
+		        
 
           
             
             
              
-              res.send(setTemperamentos)
+              res.send(temperamentos)
                 } catch (error) {
                     console.log(error)
                 }

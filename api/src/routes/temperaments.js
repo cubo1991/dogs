@@ -45,7 +45,7 @@ router.get('/', async (req,res, next) =>{
            
             
              
-              res.send(tempbd)
+              res.send(nuevoTemperamentos)
                 } catch (error) {
                     console.log(error)
                 }

@@ -67,49 +67,51 @@ router.get('/', async (req, res, next) => {
 
 router.get('/:idRaza', async (req, res, next) => {
     const { idRaza } = req.params
-
-    if (idRaza) {
-        let numero = Number(idRaza)
-        console.log(numero)
+    function soloNumeros(str) {
+        return /^\d+$/.test(str);  }
+      
+        
         try {
+            if (soloNumeros(idRaza)) {
+                let numero = Number(idRaza)
             let razaApis = await axios.get(`https://api.thedogapi.com/v1/breeds`)
             let busqueda = razaApis.data.find(e => e.id === numero)
 
             res.send(busqueda)
+        } else {
+            let razaDB = await Raza.findByPk(idRaza, {include: Temperamento})
+            res.send(razaDB)
 
+        }
         } catch (error) {
             next(error)
         }
-    }
+    
 
-})
-
-router.put('/', (req, res, next) => {
-    res.send('put')
 })
 
 router.post('/', async (req, res, next) => {
     try {
         const { Name, Height_max, Height_min, Weight_max, Weight_min,
-            Life_span } = req.body;
+            Life_span, ID } = req.body;
         const newRaza = await Raza.create({
             Name,
             Height_max,
             Height_min,
             Weight_max,
             Weight_min,
-            Life_span
+            Life_span,
+            
 
         })
+        .then((raza) => raza.setTemperamentos(ID))
         res.send(newRaza)
     } catch (error) {
         next(error)
     }
 
 })
-router.delete('/', (req, res, next) => {
-    res.send('delete')
-})
+
 
 
 module.exports = router;

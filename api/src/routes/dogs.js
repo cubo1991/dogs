@@ -3,6 +3,7 @@ const axios = require('axios')
 const { Raza, Temperamento } = require('../db')
 const { Op } = require('sequelize');
 const db = require('../db');
+const {API_KEY} = process.env
 
 const router = Router();
 
@@ -12,12 +13,12 @@ router.get('/', async (req, res, next) => {
     const { name } = req.query
     const { idRaza } = req.params
     try {
-        let razaApis = await axios.get('https://api.thedogapi.com/v1/breeds')
+        let razaApis = await axios.get(`https://api.thedogapi.com/v1/breeds?api_key=${API_KEY}`)
 
 
 
         if (!name) {
-            let razaDB = await Raza.findAll({ include: [Temperamento] })
+            let razaDB = await Raza.findAll({ include: Temperamento })
             let razasdeApi = razaApis.data.map((info) => {
                 return {
                     ID: info.id,
@@ -74,12 +75,12 @@ router.get('/:idRaza', async (req, res, next) => {
         try {
             if (soloNumeros(idRaza)) {
                 let numero = Number(idRaza)
-            let razaApis = await axios.get(`https://api.thedogapi.com/v1/breeds`)
+            let razaApis = await axios.get(`https://api.thedogapi.com/v1/breeds?api_key=${API_KEY}`)
             let busqueda = razaApis.data.find(e => e.id === numero)
 
             res.send(busqueda)
         } else {
-            let razaDB = await Raza.findByPk(idRaza, {include: Temperamento})
+            let razaDB = await Raza.findByPk(idRaza, {include: [Temperamento]})
             res.send(razaDB)
 
         }
@@ -104,13 +105,22 @@ router.post('/', async (req, res, next) => {
             
 
         })
-        .then((raza) => raza.setTemperamentos(ID))
+        let temperamento = await Temperamento.findAll({
+            where: {ID: ID}
+        })
+        newRaza.addTemperamento(temperamento)
         res.send(newRaza)
     } catch (error) {
         next(error)
     }
 
 })
+
+
+    
+     
+  
+  
 
 
 

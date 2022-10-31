@@ -1,9 +1,10 @@
 import './App.css';
+import { Razas } from './Components/Razas/Razas';
 
 function App() {
   return (
     <div className="App">
-      <h1>Henry Dogs</h1>
+      <h1><Razas /></h1>
     </div>
   );
 }

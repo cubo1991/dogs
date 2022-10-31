@@ -22,9 +22,11 @@ router.get('/', async (req, res, next) => {
                 through: {
                     attributes: []
                 }
-                }})
-            let razasdeApi = razaApis.data.map((info) => {
-          
+                }
+            })
+            let razasdeApi = razaApis.data.map((info) => {       
+                
+
 
                 return {
                     ID: info.id,

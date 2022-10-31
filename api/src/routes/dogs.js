@@ -2,7 +2,6 @@ const { Router } = require('express');
 const axios = require('axios')
 const { Raza, Temperamento } = require('../db')
 const { Op } = require('sequelize');
-const db = require('../db');
 const {API_KEY} = process.env
 
 const router = Router();
@@ -11,15 +10,22 @@ const router = Router();
 
 router.get('/', async (req, res, next) => {
     const { name } = req.query
-    const { idRaza } = req.params
+    
     try {
         let razaApis = await axios.get(`https://api.thedogapi.com/v1/breeds?api_key=${API_KEY}`)
 
 
 
         if (!name) {
-            let razaDB = await Raza.findAll({ include: Temperamento })
+            let razaDB = await Raza.findAll({ include:{
+                model: Temperamento,
+                through: {
+                    attributes: []
+                }
+                }})
             let razasdeApi = razaApis.data.map((info) => {
+          
+
                 return {
                     ID: info.id,
                     Name: info.name,
@@ -28,7 +34,9 @@ router.get('/', async (req, res, next) => {
                     Weight_max: Number(info.weight.imperial.split(" - ")[1]),
                     Weight_min: Number(info.weight.imperial.split(" - ")[0]),
                     Life_span: Number(info.life_span.split(" - ")[0]),
-                    img: info.image.url,
+                    Img: [{url:info.image.url}, {id: info.image.id}],
+                    temperamentos: [{Name: info.temperament}]
+                    
                 }
             })
             let razas = [...razaDB, ...razasdeApi]
@@ -41,8 +49,8 @@ router.get('/', async (req, res, next) => {
 
             let razaDB = await Raza.findAll({
                 include: [Temperamento],
-                where: { Name: { [Op.substring]: `${name}` } },
-            })
+                where: { Name: { [Op.substring]: name } },
+                           })
             let dbFiltrado = razaDB.map((info) => info.Name)
             let razasdeApi = razaApis.data.map((info) => info.name
             )
@@ -61,7 +69,7 @@ router.get('/', async (req, res, next) => {
 
 
     } catch (error) {
-        console.log(error)
+        next(error)
     }
 
 })
@@ -77,15 +85,25 @@ router.get('/:idRaza', async (req, res, next) => {
                 let numero = Number(idRaza)
             let razaApis = await axios.get(`https://api.thedogapi.com/v1/breeds?api_key=${API_KEY}`)
             let busqueda = razaApis.data.find(e => e.id === numero)
+            if(busqueda){res.send(busqueda)}else {
+                res.status(404).send("Esta página no existe")
+            }
 
-            res.send(busqueda)
+           
         } else {
             let razaDB = await Raza.findByPk(idRaza, {include: [Temperamento]})
-            res.send(razaDB)
+            if(razaDB){res.send(razaDB)}else {
+                res.status(404).send("Esta página no existe")
+            }
+            
 
         }
-        } catch (error) {
-            next(error)
+        } catch (error) {         
+               error.message= "Esta página no existe"
+               error.status = 404
+           next(error)
+            
+            
         }
     
 
@@ -102,13 +120,15 @@ router.post('/', async (req, res, next) => {
             Weight_max,
             Weight_min,
             Life_span,
+            Image: "https://images.dog.ceo/breeds/hound-plott/hhh_plott002.JPG"
             
 
         })
+       if(ID){
         let temperamento = await Temperamento.findAll({
             where: {ID: ID}
         })
-        newRaza.addTemperamento(temperamento)
+        newRaza.addTemperamento(temperamento)}
         res.send(newRaza)
     } catch (error) {
         next(error)

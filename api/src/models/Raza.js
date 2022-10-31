@@ -36,6 +36,10 @@ module.exports = (sequelize) => {
     Life_span: {
         type: DataTypes.INTEGER
 
+    },
+    Image: {
+      type: DataTypes.STRING,
+      allowNull: false
     }
   },
   {

@@ -16,7 +16,7 @@ export default function reducer(state = initialState, action) {
             }
                   
     
-        default:
-            break;
+        default: return state
+           
     }
 }

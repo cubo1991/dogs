@@ -55,21 +55,13 @@ router.get('/', async (req, res, next) => {
             })
         }
 
-        res.send(tempbd)
+        res.status(200).send("La base de datos esta actualizada")
     } catch (error) {
         console.log(error)
     }
 
 })
-router.put('/', (req, res, next) => {
-    res.send('put')
-})
-router.post('/', (req, res, next) => {
-    res.send('post')
-})
-router.delete('/', (req, res, next) => {
-    res.send('delete')
-})
+
 
 
 module.exports = router;

@@ -19,9 +19,10 @@ router.get('/', async (req, res, next) => {
 
 
         })
+       
         let strTemperamentos = temperamentos.split(',')
         let setTemperamentos = new Set(strTemperamentos)
-        let arrayTemperamentos = Array.from(setTemperamentos)
+         let arrayTemperamentos = Array.from(setTemperamentos)
         let nuevoTemperamentos = [];
         let tempbd = await Temperamento.findAll()
 
@@ -46,6 +47,7 @@ router.get('/', async (req, res, next) => {
 
      
         let setnuevoTemperamentos = new Set(nuevoTemperamentos)
+        console.log(setnuevoTemperamentos)
         let temperaments = Array.from(setnuevoTemperamentos)
         
         for (let i = 0; i < temperaments.length; i++) {

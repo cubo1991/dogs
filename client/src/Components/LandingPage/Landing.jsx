@@ -1,10 +1,10 @@
 import React, {useState} from 'react'
-import { Razas } from '../Razas/Razas'
+import {ContainerPrincipal}  from '../PrincipalContainer/ContainerPrincipal'
 
 
 export const Landing = () => {
   let [enter, setEnter] = useState(false)
-  let enterRazas = () => {
+  let enterContainer = () => {
     setEnter(true)
   }
 
@@ -16,10 +16,10 @@ export const Landing = () => {
       ?
       <div>
       <h1>Landing</h1>
-      <button onClick={enterRazas}>Ingresá al sitio</button>
+      <button onClick={enterContainer}>Ingresá al sitio</button>
       </div>
       :
-      <Razas/>
+      <ContainerPrincipal/>
     }
 
 

@@ -62,7 +62,16 @@ router.get('/', async (req, res, next) => {
                     ID: info.id,
                     Name: info.name,
                     Height_max: Number(info.height.imperial.split(" - ")[1]),
-                    Height_min: Number(info.height.imperiagi
+                    Height_min: Number(info.height.imperial.split(" - ")[0]),
+                    Weight_max: Number(info.weight.imperial.split(" - ")[1]),
+                    Weight_min: Number(info.weight.imperial.split(" - ")[0]),
+                    Life_span:  Number(info.life_span.split(" - ")[0]),
+                    Img: info.image.url,
+                    temperamentos: [temperamentoSplit]
+
+                }
+            })
+            let razas = [...razaDBMap, ...razasdeApi]
             res.send(razas)
         }
 
@@ -70,16 +79,61 @@ router.get('/', async (req, res, next) => {
         if (name) {
 
             let razaDB = await Raza.findAll({
-                include: [Temperamento],
-                where: { Name: { [Op.substring]: name } },
+                include: {
+                    model: Temperamento,
+                    attributes: ["NameT"],
+                    through: {
+                    attributes:[]
+                }
+                },
+                where: { Name: { [Op.iLike]:"%"+ name + "%" } },
             })
-            let dbFiltrado = razaDB.map((info) => info.Name)
-            let razasdeApi = razaApis.data.map((info) => info.name
-            )
-            let apiFiltrado = razasdeApi.filter(n => n.includes(name) === true)
-            console.log(dbFiltrado)
-            let razas = [...dbFiltrado, ...apiFiltrado]
-            if (razas.length === 0) { res.send("No hay razas disponibles") } else {
+            let razaDBMap = razaDB.map((info) => {
+
+                let temperamentos = info.temperamentos.map((t) => {
+                    return t.NameT + " "
+                })
+
+              
+                return {
+                    ID: info.Id,
+                    Name: info.Name,
+                    Height_max: info.Height_max,
+                    Height_min: info.Height_min,
+                    Weight_max: info.Weight_max,
+                    Weight_min: info.Weight_min,
+                    Life_span: info.Life_span,
+                    Img: info.Image,
+                    temperamentos: temperamentos
+                   
+
+
+
+                }
+
+
+
+            })
+            let razasdeApi = razaApis.data.map((info) => {
+                let temperamentoSplit = String(info.temperament).split(",")       
+                   return {
+                    ID: info.id,
+                    Name: info.name,
+                    Height_max: Number(info.height.imperial.split(" - ")[1]),
+                    Height_min: Number(info.height.imperial.split(" - ")[0]),
+                    Weight_max: Number(info.weight.imperial.split(" - ")[1]),
+                    Weight_min: Number(info.weight.imperial.split(" - ")[0]),
+                    Life_span:  Number(info.life_span.split(" - ")[0]),
+                    Img: info.image.url,
+                    temperamentos: [temperamentoSplit]
+
+                }
+            })
+            let apiFiltrado = razasdeApi.filter(n => n.Name.toUpperCase().includes(name.toUpperCase()) === true)
+            console.log(apiFiltrado)
+            
+            let razas = [...razaDBMap, ...apiFiltrado]
+            if (razas.length === 0) { res.send("No se ha encontrado ninguna raza con ese nombre") } else {
                 res.send(razas)
             }
 

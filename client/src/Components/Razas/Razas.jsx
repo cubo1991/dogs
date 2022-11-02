@@ -4,9 +4,13 @@ import {fetchRazas} from '../../Store/Actions'
 import { DogCard } from '../DogsCards/DogCard'
 
 
+
 export const Razas = () => {
     let razas = useSelector((state) => state.razas)
-      
+    let [show, setShow] = React.useState(false)
+    const showRazas = () =>{
+      setShow(!show)
+    }
       let dispatch = useDispatch()
       React.useEffect(()=>{
 dispatch(fetchRazas())
@@ -15,15 +19,29 @@ dispatch(fetchRazas())
      
 
   
+    console.log(typeof razas)
+  return (<div>
+ <button onClick={showRazas}> Mostrar razas</button>
+{ typeof razas !== 'string'
+?
+     <div>
+   
+   { 
+   show === true
+   ?
+  
+   razas.map((dog) =>{ return <DogCard name={dog.Name} image={dog.Img} temperaments={dog.temperamentos} weightMax={dog.Weight_max} weightMin={dog.Weight_min} />})
+   
+   :
+   ""
+    }
     
-  return ( <div>
-    
-   {razas.map((dog) =>{
-console.log(dog)
-    return <DogCard name={dog.Name} imagen={dog.Img} temperamentos={dog.temperamentos}/>
-   })}
-    
-    
+    </div>
+    :
+    <div>
+      <p>{razas}</p>
+    </div>
+}
     </div>
   )
 }

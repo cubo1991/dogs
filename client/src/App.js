@@ -5,7 +5,7 @@ import { Razas } from './Components/Razas/Razas';
 function App() {
   return (
     <div className="App">
-<Razas/>
+<Landing/>
     </div>
   );
 }

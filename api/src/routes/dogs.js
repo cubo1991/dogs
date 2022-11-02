@@ -19,6 +19,7 @@ router.get('/', async (req, res, next) => {
         if (!name) {
             let razaDB = await Raza.findAll({ include:{
                 model: Temperamento,
+                attributes: ["NameT"],
                 through: {
                     attributes: []
                 }
@@ -37,7 +38,7 @@ router.get('/', async (req, res, next) => {
                     Weight_min: Number(info.weight.imperial.split(" - ")[0]),
                     Life_span: Number(info.life_span.split(" - ")[0]),
                     Img: [{url:info.image.url}, {id: info.image.id}],
-                    temperamentos: [{Name: info.temperament}]
+                    temperamentos: [{NameT: info.temperament}]
                     
                 }
             })
@@ -114,7 +115,7 @@ router.get('/:idRaza', async (req, res, next) => {
 router.post('/', async (req, res, next) => {
     try {
         const { Name, Height_max, Height_min, Weight_max, Weight_min,
-            Life_span, ID } = req.body;
+            Life_span, NameT } = req.body;
         const newRaza = await Raza.create({
             Name,
             Height_max,
@@ -126,9 +127,11 @@ router.post('/', async (req, res, next) => {
             
 
         })
-       if(ID){
+        console.log(NameT)
+       if(NameT){
         let temperamento = await Temperamento.findAll({
-            where: {ID: ID}
+            where: {NameT: NameT},
+            attributes: ["NameT"]
         })
         newRaza.addTemperamento(temperamento)}
         res.send(newRaza)

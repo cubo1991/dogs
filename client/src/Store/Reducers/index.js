@@ -2,7 +2,7 @@ import {FETCH_RAZAS} from "../Actions"
 
 const initialState = {
 
-    razas: [],
+    razas: ["queso"],
     temperamentos:[]
 }
 

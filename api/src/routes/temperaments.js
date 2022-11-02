@@ -50,14 +50,18 @@ router.get('/', async (req, res, next) => {
         
         for (let i = 0; i < temperaments.length; i++) {
             await Temperamento.create({
-                Name: nuevoTemperamentos[i]
+
+
+                NameT: temperaments[i]
 
             })
         }
 
-        res.status(200).send("La base de datos esta actualizada")
+        res.status(200).send(await Temperamento.findAll({
+            attributes: ["NameT"]
+        }))
     } catch (error) {
-        console.log(error)
+        next(error)
     }
 
 })

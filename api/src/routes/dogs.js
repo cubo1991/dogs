@@ -132,7 +132,7 @@ router.get('/', async (req, res, next) => {
             let apiFiltrado = razasdeApi.filter(n => n.Name.toUpperCase().includes(name.toUpperCase()) === true)
             
             
-            let razas = [...razaDBMap, ...apiFiltrado]
+            let razas = [...apiFiltrado,...razaDBMap]
             if (razas.length === 0) { res.send("No se ha encontrado ninguna raza con ese nombre") } else {
                 res.send(razas)
             }

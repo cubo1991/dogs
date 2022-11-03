@@ -6,7 +6,7 @@ import { DogCard } from '../DogsCards/DogCard'
 
 
 export const Razas = () => {
-    let razas = useSelector((state) => state.razas)
+    let razas = useSelector((state) => state.dogsFiltered)
     let [show, setShow] = React.useState(false)
     const showRazas = () =>{
       setShow(!show)

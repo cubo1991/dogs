@@ -53,9 +53,12 @@ export const getTemperaments = () => {
 
 }
 
-export const sortDogs = (payload) => {
-  return{type: SORT_DOGS, payload}
+export const sortDogs = (order) => {
+  
+  return{type: SORT_DOGS, payload:order}
 
 }
+
+
 
 

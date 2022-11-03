@@ -1,4 +1,4 @@
-import {FETCH_RAZAS, SEARCH_RAZAS, TEMPERAMENTS} from "../Actions"
+import {FETCH_RAZAS, SEARCH_RAZAS, SORT_DOGS, TEMPERAMENTS} from "../Actions"
 
 const initialState = {
 
@@ -24,7 +24,11 @@ export default function reducer(state = initialState, action) {
                 ...state,
                 temperamentos: action.payload
              }   
-                  
+              case SORT_DOGS:
+                return{
+                    ...state,
+                    razas: action.payload
+                }    
     
         default: return state
            

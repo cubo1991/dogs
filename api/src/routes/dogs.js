@@ -130,7 +130,7 @@ router.get('/', async (req, res, next) => {
                 }
             })
             let apiFiltrado = razasdeApi.filter(n => n.Name.toUpperCase().includes(name.toUpperCase()) === true)
-            console.log(apiFiltrado)
+            
             
             let razas = [...razaDBMap, ...apiFiltrado]
             if (razas.length === 0) { res.send("No se ha encontrado ninguna raza con ese nombre") } else {
@@ -201,7 +201,7 @@ router.post('/', async (req, res, next) => {
 
 
         })
-        console.log(NameT)
+        
         if (NameT) {
             let temperamento = await Temperamento.findAll({
                 where: { NameT: NameT },

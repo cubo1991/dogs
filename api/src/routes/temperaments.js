@@ -47,7 +47,7 @@ router.get('/', async (req, res, next) => {
 
      
         let setnuevoTemperamentos = new Set(nuevoTemperamentos)
-        console.log(setnuevoTemperamentos)
+        
         let temperaments = Array.from(setnuevoTemperamentos)
         
         for (let i = 0; i < temperaments.length; i++) {

@@ -19,7 +19,7 @@ dispatch(fetchRazas())
      
 
   
-    console.log(typeof razas)
+   
   return (<div>
  <button onClick={showRazas}> Mostrar razas</button>
 { typeof razas !== 'string'

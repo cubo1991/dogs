@@ -2,6 +2,7 @@ import axios from 'axios';
 export const FETCH_RAZAS = "FETCH_RAZAS"
 export const SEARCH_RAZAS = "SEARCH_RAZAS"
 export const TEMPERAMENTS = "TEMPERAMENTS"
+export const SORT_DOGS = "SORT_DOGS"
 
 export const fetchRazas = () => {
     return function (dispatch) {
@@ -49,6 +50,11 @@ export const getTemperaments = () => {
   }
 
  
+
+}
+
+export const sortDogs = (payload) => {
+  return{type: SORT_DOGS, payload}
 
 }
 

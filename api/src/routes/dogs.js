@@ -12,6 +12,7 @@ router.get('/', async (req, res, next) => {
     const { name } = req.query
 
     try {
+      
         let razaApis = await axios.get(`https://api.thedogapi.com/v1/breeds?api_key=${API_KEY}`)
 
         if (!name) {
@@ -27,11 +28,11 @@ router.get('/', async (req, res, next) => {
 
           
             let razaDBMap = razaDB.map((info) => {
-
+                
                 let temperamentos = info.temperamentos.map((t) => {
-                    return t.NameT + " "
+                    return t.NameT
                 })
-
+                 
               
                 return {
                     ID: info.Id,
@@ -55,7 +56,21 @@ router.get('/', async (req, res, next) => {
 
             let razasdeApi = razaApis.data.map((info) => {
                 let temperamentoSplit = String(info.temperament).split(",")
-       
+                let nuevoTemperamentos =[]
+                for(let i = 0; i < temperamentoSplit.length; i++){
+                   
+                if (temperamentoSplit[i][0] === " ") {
+                    
+                    temperamentoSplit[i] = temperamentoSplit[i].slice(1)
+                    
+                    nuevoTemperamentos = [...nuevoTemperamentos, temperamentoSplit[i]]
+                    
+
+                }
+                else { nuevoTemperamentos = [...nuevoTemperamentos, temperamentoSplit[i]] 
+                    }
+                }
+                
                
 
                 return {
@@ -67,11 +82,11 @@ router.get('/', async (req, res, next) => {
                     Weight_min: Number(info.weight.imperial.split(" - ")[0]),
                     Life_span:  Number(info.life_span.split(" - ")[0]),
                     Img: info.image.url,
-                    temperamentos: [temperamentoSplit]
+                    temperamentos: [nuevoTemperamentos]
 
                 }
             })
-            let razas = [...razaDBMap, ...razasdeApi]
+            let razas = [ ...razasdeApi, ...razaDBMap]
             res.send(razas)
         }
 
@@ -91,7 +106,7 @@ router.get('/', async (req, res, next) => {
             let razaDBMap = razaDB.map((info) => {
 
                 let temperamentos = info.temperamentos.map((t) => {
-                    return t.NameT + " "
+                    return t.NameT
                 })
 
               
@@ -115,7 +130,22 @@ router.get('/', async (req, res, next) => {
 
             })
             let razasdeApi = razaApis.data.map((info) => {
-                let temperamentoSplit = String(info.temperament).split(",")       
+                let temperamentoSplit = String(info.temperament).split(",") 
+                let nuevoTemperamentos =[]
+                for(let i = 0; i < temperamentoSplit.length; i++){
+                   
+                if (temperamentoSplit[i][0] === " ") {
+                    
+                    temperamentoSplit[i] = temperamentoSplit[i].slice(1)
+                    
+                    nuevoTemperamentos = [...nuevoTemperamentos, temperamentoSplit[i]]
+                    
+
+                }
+                else { nuevoTemperamentos = [...nuevoTemperamentos, temperamentoSplit[i]] 
+                    }
+                }
+                
                    return {
                     ID: info.id,
                     Name: info.name,
@@ -125,7 +155,7 @@ router.get('/', async (req, res, next) => {
                     Weight_min: Number(info.weight.imperial.split(" - ")[0]),
                     Life_span:  Number(info.life_span.split(" - ")[0]),
                     Img: info.image.url,
-                    temperamentos: [temperamentoSplit]
+                    temperamentos: [nuevoTemperamentos]
 
                 }
             })

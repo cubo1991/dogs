@@ -10,7 +10,7 @@ export const ContainerPrincipal = () => {
   let razas = useSelector((state) => state.dogsFiltered) 
   let cargando = useSelector((state) => state.cargando) 
   let temperaments = useSelector((state) => state.temperamentos)
-  let [selectT, setSelectT] = React.useState("Selecciona una temperamento")
+  let [selectT, setSelectT] = React.useState("Selecciona un temperamento")
     let [selectD, setSelectD] = React.useState("Api")
     let [orden, setOrden] = React.useState("")
     let [selectDogsOptions, setSelectDogsOpions] = React.useState({
@@ -27,7 +27,7 @@ export const ContainerPrincipal = () => {
       
       React.useEffect(()=>{
         dispatch(getTemperaments())
-dispatch(fetchRazas())
+      dispatch(fetchRazas())
 
 
       }, [])
@@ -46,6 +46,9 @@ dispatch(fetchRazas())
         }
         dispatch(filterDogs(selectD[0]))
         setActivadorD(true)
+        setSelectT("Selecciona un temperamento")
+        setOrden("ascendente")
+
 
        
 
@@ -60,7 +63,7 @@ dispatch(fetchRazas())
         setActivadorD(false)
     }
 
-    const OnChange = (e) => {
+    const OnChangeTemperaments = (e) => {
         setSelectT([e.target.value])
        
         setActivadorT(true)
@@ -77,19 +80,21 @@ dispatch(fetchRazas())
        
          dispatch(filterDogs("removeFilters"))
         dispatch(filterDogsTemperaments("removeFiltersT"))
-        setSelectT("Selecciona una temperamento")
+        setSelectT("Selecciona un temperamento")
+        setOrden("ascendente")
        
       
     }
 
     const onSelectChange = (e) => {
+      console.log(orden)
       setOrden(e.target.value)
     }
   return (
     <div>
         <SearchBar/>
-        <Sorter onSelectChange={onSelectChange}/>
-        <Filter onClickRemoveFilters={onClickRemoveFilters} OnChange={OnChange} OnChangeDogs={OnChangeDogs} temperaments={temperaments} selectDogsOptions={selectDogsOptions} selectT={selectT}/>
+        <Sorter onSelectChange={onSelectChange} orden={orden}/>
+        <Filter onClickRemoveFilters={onClickRemoveFilters} OnChangeTemperaments={OnChangeTemperaments} OnChangeDogs={OnChangeDogs} temperaments={temperaments} selectDogsOptions={selectDogsOptions} selectT={selectT}/>
         <Razas razas={razas} cargando={cargando}/>
 
     </div>

@@ -3,6 +3,8 @@ export const FETCH_RAZAS = "FETCH_RAZAS"
 export const SEARCH_RAZAS = "SEARCH_RAZAS"
 export const TEMPERAMENTS = "TEMPERAMENTS"
 export const SORT_DOGS = "SORT_DOGS"
+export const FILTER_DOGSTEMPERAMENTS = "FILTER_DOGSTEMPERAMENTS"
+export const FILTER_DOGS = "FILTER_DOGS"
 
 export const fetchRazas = () => {
     return function (dispatch) {
@@ -39,8 +41,8 @@ export const searchRaza = (dog) => {
 }
 
 export const getTemperaments = () => {
-  return function(dispatch) {
-    axios.get('http://localhost:3001/api/temperaments')
+  return async function(dispatch) {
+    await axios.get('http://localhost:3001/api/temperaments')
     .then((temperaments) => {
       dispatch({
         type: TEMPERAMENTS,
@@ -59,6 +61,12 @@ export const sortDogs = (order) => {
 
 }
 
-
+export const filterDogsTemperaments = (filtro) =>{
+return {type: FILTER_DOGSTEMPERAMENTS, payload:filtro}
+}
+export const filterDogs = (filtro) =>{
+  return {type: FILTER_DOGS, payload:filtro}
+  }
+  
 
 

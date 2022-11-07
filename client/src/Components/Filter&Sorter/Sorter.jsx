@@ -1,18 +1,10 @@
 import React from 'react'
-import { useDispatch } from 'react-redux'
-import { sortDogs } from '../../Store/Actions'
 
 
-export const Sorter = () => {
-    const dispatch = useDispatch()
-    const [orden, setOrden] = React.useState("")
+export const Sorter = ({onSelectChange}) => {
+    
    
-    React.useEffect(() => {
-        dispatch(sortDogs(orden))
-    }, )
-    const onSelectChange = (e) => {
-      setOrden(e.target.value)
-    }
+  
     
   return (
     <div>

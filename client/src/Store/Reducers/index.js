@@ -1,10 +1,12 @@
-import { FETCH_RAZAS, SEARCH_RAZAS, SORT_DOGS, TEMPERAMENTS } from "../Actions"
+import { FETCH_RAZAS, FILTER_DOGSTEMPERAMENTS, SEARCH_RAZAS, SORT_DOGS, TEMPERAMENTS, FILTER_DOGS } from "../Actions"
 
 const initialState = {
 
     razas: [],
     temperamentos: [],
-    dogsFiltered: []
+    dogsFiltered: [],
+    cargando: true
+    
 }
 
 export default function reducer(state = initialState, action) {
@@ -13,7 +15,8 @@ export default function reducer(state = initialState, action) {
             return {
                 ...state,
                 razas: action.payload,
-                dogsFiltered: action.payload
+                dogsFiltered: action.payload,
+                cargando: false
 
             }
         case SEARCH_RAZAS:
@@ -27,7 +30,7 @@ export default function reducer(state = initialState, action) {
                 temperamentos: action.payload
             }
         case SORT_DOGS:
-            let sortDogs = [...state.razas]
+            let sortDogs = [...state.dogsFiltered]
             sortDogs.sort((a, b) => {
                 if (action.payload === "ascendente" || action.payload === "descendente"){
                     if (a.Name.toUpperCase() > b.Name.toUpperCase()) {
@@ -58,8 +61,40 @@ export default function reducer(state = initialState, action) {
             })
             return {
                 ...state,
+               
                 dogsFiltered: [...sortDogs]
             }
+         case FILTER_DOGSTEMPERAMENTS:
+            let dogsTemps = [...state.razas]
+            
+            let filterDogsApiTemps = dogsTemps.filter(perro=> perro['temperamentos'][0].includes(action.payload) === true )
+            let filterDogsBDTemps = dogsTemps.filter(perro=> perro['temperamentos'].includes(action.payload) === true )
+            let filterTemps = [...filterDogsApiTemps, ...filterDogsBDTemps]
+            if(action.payload === "removeFiltersT") {return {
+                ...state,
+                dogsFiltered: [...state.razas]
+            }}
+         return {
+        ...state,
+        dogsFiltered: [...filterTemps]
+        
+         }   
+         case FILTER_DOGS:
+            let dogs = [...state.razas]
+            let filter = []
+            if(action.payload === "Api"){
+            filter = dogs.filter(perro=> String(perro.ID).length < 8)
+            }
+            if(action.payload === "DB"){
+                filter = dogs.filter(perro => perro.ID.length > 8  )
+                }
+            if(action.payload === "removeFilters"){ filter = state.razas}
+
+         return {
+        ...state,
+        dogsFiltered: [...filter]
+        
+         }   
 
 
 

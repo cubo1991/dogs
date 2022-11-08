@@ -3,7 +3,7 @@ import React from 'react'
 
 export const Filter = ({onClickRemoveFilters,  OnChangeTemperaments,  OnChangeDogs,  temperaments, selectDogsOptions, selectT }) => {
 
-
+let defaultValue = "Selecciona un temperamento"
 
     return (
         <div>
@@ -20,7 +20,7 @@ export const Filter = ({onClickRemoveFilters,  OnChangeTemperaments,  OnChangeDo
 <div>
 <h5>Filtrar por temperamentos</h5>
             <select name="select" id='selectT' value={selectT} onChange={OnChangeTemperaments}>
-                <option  disabled selected hidden>Selecciona un temperamento</option>
+                <option  disabled defaultValue={defaultValue} hidden>{defaultValue}</option>
                 
                 {temperaments.map(t =>
                     <option key={t.NameT} value={t.NameT}>{t.NameT}</option>

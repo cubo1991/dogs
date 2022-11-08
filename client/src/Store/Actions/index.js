@@ -5,6 +5,7 @@ export const TEMPERAMENTS = "TEMPERAMENTS"
 export const SORT_DOGS = "SORT_DOGS"
 export const FILTER_DOGSTEMPERAMENTS = "FILTER_DOGSTEMPERAMENTS"
 export const FILTER_DOGS = "FILTER_DOGS"
+export const PAG_DOGS = "PAG_DOGS"
 
 export const fetchRazas = () => {
     return function (dispatch) {
@@ -67,6 +68,8 @@ return {type: FILTER_DOGSTEMPERAMENTS, payload:filtro}
 export const filterDogs = (filtro) =>{
   return {type: FILTER_DOGS, payload:filtro}
   }
-  
 
+  export const paginationDogs = (payload) => {
+    return {type: PAG_DOGS, payload}
+  }
 

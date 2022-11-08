@@ -1,11 +1,13 @@
-import { FETCH_RAZAS, FILTER_DOGSTEMPERAMENTS, SEARCH_RAZAS, SORT_DOGS, TEMPERAMENTS, FILTER_DOGS } from "../Actions"
+import { FETCH_RAZAS, FILTER_DOGSTEMPERAMENTS, SEARCH_RAZAS, SORT_DOGS, TEMPERAMENTS, FILTER_DOGS, PAG_DOGS } from "../Actions"
 
 const initialState = {
 
     razas: [],
     temperamentos: [],
     dogsFiltered: [],
-    cargando: true
+    cargando: true,
+    currentPage: 1,
+    dogsPag: []
     
 }
 
@@ -15,7 +17,8 @@ export default function reducer(state = initialState, action) {
             return {
                 ...state,
                 razas: action.payload,
-                dogsFiltered: action.payload,
+                // dogsFiltered: action.payload,
+                dogsPag: action.payload.slice((state.currentPage-1)*8,state.currentPage*8),
                 cargando: false
 
             }
@@ -30,7 +33,7 @@ export default function reducer(state = initialState, action) {
                 temperamentos: action.payload
             }
         case SORT_DOGS:
-            let sortDogs = [...state.dogsFiltered]
+            let sortDogs = [...state.razas]
             sortDogs.sort((a, b) => {
                 if (action.payload === "ascendente" || action.payload === "descendente"){
                     if (a.Name.toUpperCase() > b.Name.toUpperCase()) {
@@ -60,9 +63,10 @@ export default function reducer(state = initialState, action) {
 
             })
             return {
-                ...state,
-               
-                dogsFiltered: [...sortDogs]
+                ...state,               
+                dogsFiltered: [...sortDogs],
+                currentPage: 1
+                
             }
          case FILTER_DOGSTEMPERAMENTS:
             let dogsTemps = [...state.razas]
@@ -76,7 +80,9 @@ export default function reducer(state = initialState, action) {
             }}
          return {
         ...state,
-        dogsFiltered: [...filterTemps]
+         dogsFiltered: [...filterTemps],
+         dogsPag:[...filterTemps],
+         currentPage: 1
         
          }   
          case FILTER_DOGS:
@@ -92,9 +98,23 @@ export default function reducer(state = initialState, action) {
 
          return {
         ...state,
+        currentPage: 1,
         dogsFiltered: [...filter]
         
          }   
+         case PAG_DOGS:
+            let aux;
+            if(state.dogsFiltered.length === 0) { aux = state.razas}
+            else {aux= state.dogsFiltered}
+         
+
+
+            return{
+                ...state,              
+                dogsPag: [...aux].slice((state.currentPage-1)*8,state.currentPage*8),
+                currentPage: action.payload,
+                
+            }
 
 
 

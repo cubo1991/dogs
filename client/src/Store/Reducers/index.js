@@ -1,4 +1,4 @@
-import { FETCH_RAZAS, FILTER_DOGSTEMPERAMENTS, SEARCH_RAZAS, SORT_DOGS, TEMPERAMENTS, FILTER_DOGS, PAG_DOGS } from "../Actions"
+import { FETCH_RAZAS, FILTER_DOGSTEMPERAMENTS, SEARCH_RAZAS, SORT_DOGS, TEMPERAMENTS, FILTER_DOGS, PAG_DOGS, GET_DETAILS } from "../Actions"
 
 const initialState = {
 
@@ -9,7 +9,8 @@ const initialState = {
     currentPage: 1,
     dogsPag: [],
     searchedDog: [],
-    aux: []
+    aux: [],
+    dogDetail: [] 
 
     
 }
@@ -125,6 +126,11 @@ export default function reducer(state = initialState, action) {
                 currentPage: action.payload,
                 
             }
+            case GET_DETAILS:
+                return{
+                    ...state,
+                    dogDetail: action.payload
+                }
 
 
 

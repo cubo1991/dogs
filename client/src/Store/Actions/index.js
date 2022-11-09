@@ -6,6 +6,7 @@ export const SORT_DOGS = "SORT_DOGS"
 export const FILTER_DOGSTEMPERAMENTS = "FILTER_DOGSTEMPERAMENTS"
 export const FILTER_DOGS = "FILTER_DOGS"
 export const PAG_DOGS = "PAG_DOGS"
+export const GET_DETAILS = "GET_DETAILS"
 
 export const fetchRazas = () => {
     return function (dispatch) {
@@ -21,6 +22,19 @@ export const fetchRazas = () => {
     )}
 
 
+}
+
+export const getDetails = (id) => {
+  return function (dispatch) {
+    axios.get('http://localhost:3001/api/dogs/' + id)
+    .then((raza) => {
+      dispatch({
+        type: GET_DETAILS,
+        payload: raza.data
+      })
+    }
+    )
+  }
 }
 
 export const searchRaza = (dog) => {

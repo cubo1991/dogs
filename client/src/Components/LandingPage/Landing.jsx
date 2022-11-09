@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import {ContainerPrincipal}  from '../PrincipalContainer/ContainerPrincipal'
+import { Link } from 'react-router-dom'
   
 
 export const Landing = () => {
@@ -11,16 +12,14 @@ export const Landing = () => {
 
   return (
     <div>
-    {
-      enter === false
-      ?
-      <div>
+
+      
       <h1>Landing</h1>
-      <button onClick={enterContainer}>Ingresá al sitio</button>
-      </div>
-      :
-      <ContainerPrincipal/>
-    }
+      <Link to="/home">
+      <button>Ingresá al sitio</button>
+      </Link>
+      
+    
 
 
 

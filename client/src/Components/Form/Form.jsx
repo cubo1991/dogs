@@ -5,32 +5,32 @@ const Form = () => {
     <div>
         <div>
         <form>
-            <label> Nombre </label>
+            <label> Name </label>
             <input
-            name="Nombre"
+            name="Name"
             type="text"            
             />
-            <label> Altura Máxima</label>
+            <label> Height Max</label>
             <input 
-            name="Altura Máxima"
+            name="Height Max"
             type="text" />
-          <label> Altura Mínima</label>
+          <label> Height Min</label>
             <input 
-            name="Altura Mínima"
+            name="Height Min"
             type="text" />
-          <label> Peso Máxima</label>
+          <label> Weight Max</label>
             <input 
-            name="Peso Máxima"
+            name="Weight Max"
             type="text" />
-          <label> Peso Mínimo</label>
+          <label> Weight Min</label>
             <input 
-            name="Peso Mínimo"
+            name="Weight Min"
             type="text" />
-          <label> Años de vida</label>
+          <label> Life Span</label>
             <input 
-            name="Años de vida"
+            name="Life Span"
             type="text"  />
-            <label>Temperamentos</label>
+            <label>Temperaments</label>
          <select>
          <option value="grapefruit">Grapefruit</option>
   <option value="lime">Lime</option>

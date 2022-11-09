@@ -148,7 +148,7 @@ export const ContainerPrincipal = () => {
 
   return (
     <div>
-      <Form/>
+      
         <SearchBar/>
         <Sorter onSelectChange={onSelectChange} orden={orden}/>
         <Filter  onClickRemoveFilters={onClickRemoveFilters} OnChangeTemperaments={OnChangeTemperaments} OnChangeDogs={OnChangeDogs} temperaments={temperaments} selectT={selectT}/>

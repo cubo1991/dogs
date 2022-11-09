@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const DogCard = ({name, image, temperaments, weightMin, weightMax}) => {
+export const DogCardDetail = ({name, image, temperaments, weightMin, weightMax, heightMin, heightMax, lifeSpan}) => {
 
 
 
@@ -11,6 +11,9 @@ export const DogCard = ({name, image, temperaments, weightMin, weightMax}) => {
             <img src={image} alt={name}/>
             <h3>Weight Min: {weightMin}</h3>
             <h3>Weight Max: {weightMax}</h3>
+            <h3>Height Min: {heightMin} </h3>
+            <h3>Height Max: {heightMax} </h3>
+            <h3>Life Span:  {lifeSpan}</h3>
             <h3>Temperaments: {temperaments.toString().replaceAll(',', ' ') } </h3>
             
     </div>

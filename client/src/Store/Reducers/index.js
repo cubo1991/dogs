@@ -7,7 +7,10 @@ const initialState = {
     dogsFiltered: [],
     cargando: true,
     currentPage: 1,
-    dogsPag: []
+    dogsPag: [],
+    searchedDog: [],
+    aux: []
+
     
 }
 
@@ -17,14 +20,16 @@ export default function reducer(state = initialState, action) {
             return {
                 ...state,
                 razas: action.payload,
-                // dogsFiltered: action.payload,
+                dogsFiltered: action.payload,
                 dogsPag: action.payload.slice((state.currentPage-1)*8,state.currentPage*8),
                 cargando: false
 
             }
         case SEARCH_RAZAS:
+            
             return {
                 ...state,
+                searchedDog: action.payload,
                 dogsFiltered: action.payload
             }
         case TEMPERAMENTS:
@@ -65,6 +70,7 @@ export default function reducer(state = initialState, action) {
             return {
                 ...state,               
                 dogsFiltered: [...sortDogs],
+                dogsPag:[...sortDogs].slice((state.currentPage-1)*8,state.currentPage*8),
                 currentPage: 1
                 
             }
@@ -76,12 +82,12 @@ export default function reducer(state = initialState, action) {
             let filterTemps = [...filterDogsApiTemps, ...filterDogsBDTemps]
             if(action.payload === "removeFiltersT") {return {
                 ...state,
-                dogsFiltered: [...state.razas]
+                dogsFiltered: [...state.razas].slice((state.currentPage-1)*8,state.currentPage*8),
             }}
          return {
         ...state,
          dogsFiltered: [...filterTemps],
-         dogsPag:[...filterTemps],
+         dogsPag:[...filterTemps].slice((state.currentPage-1)*8,state.currentPage*8),
          currentPage: 1
         
          }   
@@ -99,19 +105,20 @@ export default function reducer(state = initialState, action) {
          return {
         ...state,
         currentPage: 1,
-        dogsFiltered: [...filter]
+        // dogsFiltered: [...filter],
+        dogsPag:[...filter].slice((state.currentPage-1)*8,state.currentPage*8)
         
          }   
          case PAG_DOGS:
-            let aux;
-            if(state.dogsFiltered.length === 0) { aux = state.razas}
-            else {aux= state.dogsFiltered}
+            
+            if(state.cargando === true) { state.aux = state.razas}
+            else {state.aux = state.dogsFiltered}
          
 
 
             return{
                 ...state,              
-                dogsPag: [...aux].slice((state.currentPage-1)*8,state.currentPage*8),
+                dogsPag: [...state.aux].slice((state.currentPage-1)*8,state.currentPage*8),
                 currentPage: action.payload,
                 
             }

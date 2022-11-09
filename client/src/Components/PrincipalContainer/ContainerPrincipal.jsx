@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import {fetchRazas,getTemperaments, filterDogs,filterDogsTemperaments,sortDogs, paginationDogs} from '../../Store/Actions'
 export const ContainerPrincipal = () => {
   let razas = useSelector((state) => state.razas) 
+  let dogFiltered = useSelector((state) => state.dogsFiltered) 
   let paginaActual = useSelector((state) => state.currentPage) 
   let cargando = useSelector((state) => state.cargando) 
   let temperaments = useSelector((state) => state.temperamentos)
@@ -14,11 +15,7 @@ export const ContainerPrincipal = () => {
   let [selectT, setSelectT] = React.useState("Selecciona un temperamento")
     let [selectD, setSelectD] = React.useState("Api")
     let [orden, setOrden] = React.useState("")
-    let [selectDogsOptions, setSelectDogsOpions] = React.useState({
-      opcion1:"Ver razas de perros",
-      opcion2: "Ver tus perros"
-
-    })
+  
 
  
 
@@ -30,24 +27,29 @@ export const ContainerPrincipal = () => {
 
       let dispatch = useDispatch()
 
+      React.useEffect(() => {
+        dispatch(sortDogs(orden))
+       
+    },[orden] )
+    React.useEffect(() => {
+      dispatch(paginationDogs(paginaActual))
      
+  },[paginaActual] )
       
       React.useEffect(()=>{
+        
         dispatch(getTemperaments())
       dispatch(fetchRazas())
-      
+     
       
     
 
 
       }, [])
-      React.useEffect(() => {
-        dispatch(sortDogs(orden))
-       
-    },[orden] )
-    React.useEffect(()=>{
-      dispatch(paginationDogs(paginaActual))
-    },[paginaActual])
+    
+    // React.useEffect(()=>{
+    //   dispatch(paginationDogs(paginaActual))
+    // },[paginaActual])
 
       const OnChangeDogs = (e) => {
 
@@ -60,7 +62,7 @@ export const ContainerPrincipal = () => {
         dispatch(filterDogs(selectD[0]))
         setActivadorD(true)
         setSelectT("Selecciona un temperamento")
-        setOrden("ascendente")
+       
 
 
        
@@ -102,6 +104,8 @@ export const ContainerPrincipal = () => {
     const onSelectChange = (e) => {
       
       setOrden(e.target.value)
+      
+       
     }
 
     const prevHandler = () =>  {
@@ -112,8 +116,8 @@ export const ContainerPrincipal = () => {
       
     }
     const nextHandler = () => {
-     
-      if(paginaActual === Math.ceil(razas.length/8)) return;
+     console.log(dogFiltered.length)
+      if(paginaActual === Math.ceil(dogFiltered.length/8)) return;
       
       let nextPage = paginaActual + 1
      
@@ -129,14 +133,14 @@ export const ContainerPrincipal = () => {
     const lastHandler = () => {
      
      
-      dispatch(paginationDogs(Math.ceil(razas.length/8)))
+      dispatch(paginationDogs(Math.ceil(dogFiltered.length/8)))
     }
 
   return (
     <div>
         <SearchBar/>
         <Sorter onSelectChange={onSelectChange} orden={orden}/>
-        <Filter  onClickRemoveFilters={onClickRemoveFilters} OnChangeTemperaments={OnChangeTemperaments} OnChangeDogs={OnChangeDogs} temperaments={temperaments} selectDogsOptions={selectDogsOptions} selectT={selectT}/>
+        <Filter  onClickRemoveFilters={onClickRemoveFilters} OnChangeTemperaments={OnChangeTemperaments} OnChangeDogs={OnChangeDogs} temperaments={temperaments} selectT={selectT}/>
         <Razas lastHandler={lastHandler} firstHandler={firstHandler} razas={dogsPag} cargando={cargando} paginaActual={paginaActual} prevHandler={prevHandler} nextHandler={nextHandler} />
 
     </div>

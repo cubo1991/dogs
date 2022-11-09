@@ -1,7 +1,7 @@
 import React from 'react'
 
 
-export const Filter = ({onClickRemoveFilters,  OnChangeTemperaments,  OnChangeDogs,  temperaments, selectDogsOptions, selectT }) => {
+export const Filter = ({onClickRemoveFilters,  OnChangeTemperaments,  OnChangeDogs,  temperaments, selectT }) => {
 
 let defaultValue = "Selecciona un temperamento"
 
@@ -11,8 +11,8 @@ let defaultValue = "Selecciona un temperamento"
         <div>
             <div>
          <h5>Filtrar por perros</h5>
-          <button onClick={OnChangeDogs} value={"Api"}>{selectDogsOptions.opcion1}</button>
-          <button onClick={OnChangeDogs} value={"DB"}>{selectDogsOptions.opcion2}</button>
+          <button onClick={OnChangeDogs} value={"Api"}>{"Ver razas de perros"}</button>
+          <button onClick={OnChangeDogs} value={"DB"}>{"Ver tus perros"}</button>
           </div>         
             
                 

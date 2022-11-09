@@ -72,16 +72,20 @@ export const ContainerPrincipal = () => {
     const filtrarT = () => {
         dispatch(filterDogsTemperaments(selectT[0]))
         setActivadorT(false)
+        
+        
     }
     const filtrarD =() => {
         dispatch(filterDogs(selectD))
         setActivadorD(false)
+        
     }
 
     const OnChangeTemperaments = (e) => {
         setSelectT([e.target.value])
        
         setActivadorT(true)
+       
 
      
         
@@ -96,7 +100,7 @@ export const ContainerPrincipal = () => {
          dispatch(filterDogs("removeFilters"))
         dispatch(filterDogsTemperaments("removeFiltersT"))
         setSelectT("Selecciona un temperamento")
-        setOrden("ascendente")
+        setOrden("Selecciona un criterio")
        
       
     }
@@ -104,7 +108,7 @@ export const ContainerPrincipal = () => {
     const onSelectChange = (e) => {
       
       setOrden(e.target.value)
-      
+      setSelectT("Selecciona un temperamento")
        
     }
 
@@ -123,7 +127,6 @@ export const ContainerPrincipal = () => {
      
       dispatch(paginationDogs(nextPage))
     }
-
     const firstHandler = () => {
      
  

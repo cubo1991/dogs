@@ -2,7 +2,8 @@ import React from 'react'
 
 
 export const Sorter = ({onSelectChange, orden}) => {
-    
+  let defaultValue;
+  if(orden === "") { defaultValue = "Selecciona un criterio"}
 
   
     
@@ -10,8 +11,8 @@ export const Sorter = ({onSelectChange, orden}) => {
     <div>
         <div>
     <label htmlFor="Sort">Ordenar por </label>   
-    <select name="select" id="Sort" value={orden} onChange={onSelectChange}> 
-   
+    <select name="select" id="Sort" value={defaultValue} onChange={onSelectChange}> 
+    <option  disabled defaultValue={defaultValue} hidden>{defaultValue}</option>
     <option value="ascendente">Orden alfabético </option>
      <option value="descendente">Orden alfabético descendente </option>
      <option value="ascendenteMax"> Menor peso máximo </option>

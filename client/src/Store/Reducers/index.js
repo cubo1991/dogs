@@ -29,8 +29,9 @@ export default function reducer(state = initialState, action) {
             
             return {
                 ...state,
-                searchedDog: action.payload,
-                dogsFiltered: action.payload
+               
+                dogsFiltered: action.payload,
+                currentPage: 1
             }
         case TEMPERAMENTS:
             return {
@@ -39,6 +40,7 @@ export default function reducer(state = initialState, action) {
             }
         case SORT_DOGS:
             let sortDogs = [...state.razas]
+            
             sortDogs.sort((a, b) => {
                 if (action.payload === "ascendente" || action.payload === "descendente"){
                     if (a.Name.toUpperCase() > b.Name.toUpperCase()) {
@@ -63,7 +65,7 @@ export default function reducer(state = initialState, action) {
                     if (a.Weight_min < b.Weight_min) {
                         if (action.payload === "ascendenteMin") { return -1 } else { return 1 }
                     }}
-
+                if(action.payload === "") {return 0}    
                 return 0;
 
             })

@@ -3,7 +3,8 @@ import React from 'react'
 
 export const Filter = ({onClickRemoveFilters,  OnChangeTemperaments,  OnChangeDogs,  temperaments, selectT }) => {
 
-let defaultValue = "Selecciona un temperamento"
+
+    let defaultValue = "Selecciona un temperamento"
 
     return (
         <div>

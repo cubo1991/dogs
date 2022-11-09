@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import {ContainerPrincipal}  from '../PrincipalContainer/ContainerPrincipal'
-
+  
 
 export const Landing = () => {
   let [enter, setEnter] = useState(false)

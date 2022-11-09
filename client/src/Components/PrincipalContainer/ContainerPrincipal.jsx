@@ -5,6 +5,7 @@ import { Razas } from '../Razas/Razas'
 import { SearchBar } from '../SearchBar/SearchBar'
 import { useDispatch, useSelector } from 'react-redux'
 import {fetchRazas,getTemperaments, filterDogs,filterDogsTemperaments,sortDogs, paginationDogs} from '../../Store/Actions'
+import Form from '../Form/Form'
 export const ContainerPrincipal = () => {
   let razas = useSelector((state) => state.razas) 
   let dogFiltered = useSelector((state) => state.dogsFiltered) 
@@ -28,6 +29,7 @@ export const ContainerPrincipal = () => {
       let dispatch = useDispatch()
 
       React.useEffect(() => {
+        if(orden === "") return;
         dispatch(sortDogs(orden))
        
     },[orden] )
@@ -62,6 +64,7 @@ export const ContainerPrincipal = () => {
         dispatch(filterDogs(selectD[0]))
         setActivadorD(true)
         setSelectT("Selecciona un temperamento")
+        setOrden("")
        
 
 
@@ -73,6 +76,8 @@ export const ContainerPrincipal = () => {
         dispatch(filterDogsTemperaments(selectT[0]))
         setActivadorT(false)
         
+       
+        
         
     }
     const filtrarD =() => {
@@ -82,10 +87,12 @@ export const ContainerPrincipal = () => {
     }
 
     const OnChangeTemperaments = (e) => {
-        setSelectT([e.target.value])
+      
+      setSelectT([e.target.value])
        
         setActivadorT(true)
-       
+        setOrden("")
+     
 
      
         
@@ -106,7 +113,7 @@ export const ContainerPrincipal = () => {
     }
 
     const onSelectChange = (e) => {
-      
+      console.log(e.target.value)
       setOrden(e.target.value)
       setSelectT("Selecciona un temperamento")
        
@@ -141,6 +148,7 @@ export const ContainerPrincipal = () => {
 
   return (
     <div>
+      <Form/>
         <SearchBar/>
         <Sorter onSelectChange={onSelectChange} orden={orden}/>
         <Filter  onClickRemoveFilters={onClickRemoveFilters} OnChangeTemperaments={OnChangeTemperaments} OnChangeDogs={OnChangeDogs} temperaments={temperaments} selectT={selectT}/>

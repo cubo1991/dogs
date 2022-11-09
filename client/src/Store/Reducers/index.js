@@ -31,6 +31,7 @@ export default function reducer(state = initialState, action) {
                 ...state,
                
                 dogsFiltered: action.payload,
+                dogsPag: action.payload,
                 currentPage: 1
             }
         case TEMPERAMENTS:

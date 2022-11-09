@@ -10,6 +10,7 @@ const router = Router();
 
 router.get('/', async (req, res, next) => {
     const { name } = req.query
+    const { idRaza } = req.params
 
     try {
       
@@ -172,7 +173,7 @@ router.get('/', async (req, res, next) => {
 
 
         }
-
+        
 
     } catch (error) {
         next(error)
@@ -192,17 +193,55 @@ router.get('/:idRaza', async (req, res, next) => {
             let numero = Number(idRaza)
             let razaApis = await axios.get(`https://api.thedogapi.com/v1/breeds?api_key=${API_KEY}`)
             let busqueda = razaApis.data.find(e => e.id === numero)
-            if (busqueda) { res.send(busqueda) } else {
+
+            if (busqueda) { 
+                let dogsData= {
+                    ID: busqueda.id,
+                    Name: busqueda.name,
+                    Height_max: Number(busqueda.height.imperial.split(" - ")[1]),
+                    Height_min: Number(busqueda.height.imperial.split(" - ")[0]),
+                    Weight_max: Number(busqueda.weight.imperial.split(" - ")[1]),
+                    Weight_min: Number(busqueda.weight.imperial.split(" - ")[0]),
+                    Life_span:  Number(busqueda.life_span.split(" - ")[0]),
+                    Img: busqueda.image.url,
+                    temperamentos: [busqueda.temperament.split(',')]
+                    
+                }
+                console.log(dogsData)
+                res.send(dogsData) } else {
                 res.status(404).send("Esta página no existe")
             }
 
 
         } else {
-            let razaDB = await Raza.findByPk(idRaza, { include: [Temperamento] })
-            if (razaDB) { res.send(razaDB) } else {
+            let razaDB = await Raza.findByPk(idRaza, { include: {
+                model: Temperamento,
+                attributes: ["NameT"],
+                through: {
+                    attributes:[]
+                }
+                
+            } })
+            if (razaDB) {
+                let dogsData= {
+                    ID: razaDB.Id,
+                    Name: razaDB.Name,
+                    Height_max: Number(razaDB.Height_max),
+                    Height_min: Number(razaDB.Height_min),
+                    Weight_max: Number(razaDB.Weight_max),
+                    Weight_min: Number(razaDB.Weight_min),
+                    Life_span:  razaDB.Life_span,
+                    Img: razaDB.Image,
+                  temperamentos: [razaDB.temperamentos.map(nombre => {return nombre.NameT  + " "})]
+                    
+                }
+                console.log(dogsData)
+                
+                res.send(dogsData) } else {
                 res.status(404).send("Esta página no existe")
             }
 
+            
 
         }
     } catch (error) {

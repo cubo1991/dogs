@@ -5,6 +5,7 @@ export const DogCardDetail = ({name, image, temperaments, weightMin, weightMax, 
 
 
   return (
+    
     <div>
 
             <h2>{name}</h2>
@@ -14,7 +15,7 @@ export const DogCardDetail = ({name, image, temperaments, weightMin, weightMax, 
             <h3>Height Min: {heightMin} </h3>
             <h3>Height Max: {heightMax} </h3>
             <h3>Life Span:  {lifeSpan}</h3>
-            <h3>Temperaments: {temperaments.toString().replaceAll(',', ' ') } </h3>
+            <h3>Temperaments: {temperaments} </h3>
             
     </div>
   )

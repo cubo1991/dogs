@@ -1,5 +1,5 @@
 import { FETCH_RAZAS, FILTER_DOGSTEMPERAMENTS, SEARCH_RAZAS, SORT_DOGS, TEMPERAMENTS, FILTER_DOGS, PAG_DOGS, GET_DETAILS } from "../Actions"
-
+let dogsShow = 8
 const initialState = {
 
     razas: [],
@@ -10,8 +10,8 @@ const initialState = {
     dogsPag: [],
     searchedDog: [],
     aux: [],
-    dogDetail: [] 
-
+    dogDetail: [], 
+    
     
 }
 
@@ -22,7 +22,7 @@ export default function reducer(state = initialState, action) {
                 ...state,
                 razas: action.payload,
                 dogsFiltered: action.payload,
-                dogsPag: action.payload.slice((state.currentPage-1)*8,state.currentPage*8),
+                dogsPag: action.payload.slice((state.currentPage-1)*dogsShow,state.currentPage*dogsShow),
                 cargando: false
 
             }
@@ -74,7 +74,7 @@ export default function reducer(state = initialState, action) {
             return {
                 ...state,               
                 dogsFiltered: [...sortDogs],
-                dogsPag:[...sortDogs].slice((state.currentPage-1)*8,state.currentPage*8),
+                dogsPag:[...sortDogs].slice((state.currentPage-1)*dogsShow,state.currentPage*dogsShow),
                 currentPage: 1
                 
             }
@@ -86,12 +86,12 @@ export default function reducer(state = initialState, action) {
             let filterTemps = [...filterDogsApiTemps, ...filterDogsBDTemps]
             if(action.payload === "removeFiltersT") {return {
                 ...state,
-                dogsFiltered: [...state.razas].slice((state.currentPage-1)*8,state.currentPage*8),
+                dogsFiltered: [...state.razas].slice((state.currentPage-1)*dogsShow,state.currentPage*dogsShow),
             }}
          return {
         ...state,
          dogsFiltered: [...filterTemps],
-         dogsPag:[...filterTemps].slice((state.currentPage-1)*8,state.currentPage*8),
+         dogsPag:[...filterTemps].slice((state.currentPage-1)*dogsShow,state.currentPage*dogsShow),
          currentPage: 1
         
          }   
@@ -99,10 +99,10 @@ export default function reducer(state = initialState, action) {
             let dogs = [...state.razas]
             let filter = []
             if(action.payload === "Api"){
-            filter = dogs.filter(perro=> String(perro.ID).length < 8)
+            filter = dogs.filter(perro=> String(perro.ID).length < dogsShow)
             }
             if(action.payload === "DB"){
-                filter = dogs.filter(perro => perro.ID.length > 8  )
+                filter = dogs.filter(perro => perro.ID.length > dogsShow  )
                 }
             if(action.payload === "removeFilters"){ filter = state.razas}
 
@@ -110,7 +110,7 @@ export default function reducer(state = initialState, action) {
         ...state,
         currentPage: 1,
         // dogsFiltered: [...filter],
-        dogsPag:[...filter].slice((state.currentPage-1)*8,state.currentPage*8)
+        dogsPag:[...filter].slice((state.currentPage-1)*dogsShow,state.currentPage*dogsShow)
         
          }   
          case PAG_DOGS:
@@ -122,7 +122,7 @@ export default function reducer(state = initialState, action) {
 
             return{
                 ...state,              
-                dogsPag: [...state.aux].slice((state.currentPage-1)*8,state.currentPage*8),
+                dogsPag: [...state.aux].slice((state.currentPage-1)*dogsShow,state.currentPage*dogsShow),
                 currentPage: action.payload,
                 
             }

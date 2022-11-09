@@ -7,8 +7,9 @@ import { DogCardDetail } from '../DogDetail/DogCardDetail'
 export const Detail = (props) => {
         let dispatch = useDispatch()
         let razaDetalle = useSelector((state => state.dogDetail))
-        // const dogsRaza = razaDetalle.map((dog) => { return <DogCardDetail name={dog.Name} image={dog.Img} temperaments={dog.temperamentos} weightMax={dog.Weight_max} weightMin={dog.Weight_min} key={dog.ID} heightMin={dog.Height_min} heightMax={dog.Height_max} lifeSpan={dog.Life_span}
-        //  /> })
+       
+
+         
  
     React.useEffect(
         ()=>{
@@ -20,10 +21,11 @@ export const Detail = (props) => {
     
     
           }, [dispatch,props.match.params.id])
-    console.log(razaDetalle)
+    console.log("hola")
   return (
     <div>
-
+{<DogCardDetail name={razaDetalle.Name} image={razaDetalle.Img} temperaments={razaDetalle.temperamentos} weightMax={razaDetalle.Weight_max} weightMin={razaDetalle.Weight_min} key={razaDetalle.ID} heightMin={razaDetalle.Height_min} heightMax={razaDetalle.Height_max} lifeSpan={razaDetalle.Life_span}
+         /> }
 
     </div>
   )

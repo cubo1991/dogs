@@ -5,23 +5,19 @@ import { Razas } from '../Razas/Razas'
 import { SearchBar } from '../SearchBar/SearchBar'
 import { useDispatch, useSelector } from 'react-redux'
 import {fetchRazas,getTemperaments, filterDogs,filterDogsTemperaments,sortDogs, paginationDogs} from '../../Store/Actions'
-import Form from '../Form/Form'
+
 export const ContainerPrincipal = () => {
-  let razas = useSelector((state) => state.razas) 
+  
   let dogFiltered = useSelector((state) => state.dogsFiltered) 
   let paginaActual = useSelector((state) => state.currentPage) 
   let cargando = useSelector((state) => state.cargando) 
   let temperaments = useSelector((state) => state.temperamentos)
   let dogsPag = useSelector((state) => state.dogsPag)
   let [selectT, setSelectT] = React.useState("Selecciona un temperamento")
-    let [selectD, setSelectD] = React.useState("Api")
-    let [orden, setOrden] = React.useState("")
-  
-
- 
-
-    let [activadorT, setActivadorT] = React.useState(false)
-    let [activadorD, setActivadorD] = React.useState(false)
+  let [selectD, setSelectD] = React.useState("Api")
+  let [orden, setOrden] = React.useState("")
+  let [activadorT, setActivadorT] = React.useState(false)
+  let [activadorD, setActivadorD] = React.useState(false)
   
    
 

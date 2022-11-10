@@ -4,7 +4,8 @@ import { Sorter } from '../Filter&Sorter/Sorter'
 import { Razas } from '../Razas/Razas'
 import { SearchBar } from '../SearchBar/SearchBar'
 import { useDispatch, useSelector } from 'react-redux'
-import {fetchRazas,getTemperaments, filterDogs,filterDogsTemperaments,sortDogs, paginationDogs} from '../../Store/Actions'
+import {numberPage, fetchRazas,getTemperaments, filterDogs,filterDogsTemperaments,sortDogs, paginationDogs} from '../../Store/Actions'
+import { SHOW_DOGS } from '../../constantes'
 
 export const ContainerPrincipal = () => {
   
@@ -45,9 +46,7 @@ export const ContainerPrincipal = () => {
 
       }, [])
     
-    // React.useEffect(()=>{
-    //   dispatch(paginationDogs(paginaActual))
-    // },[paginaActual])
+  
 
       const OnChangeDogs = (e) => {
 
@@ -123,7 +122,7 @@ export const ContainerPrincipal = () => {
       
     }
     const nextHandler = () => {
-     console.log(dogFiltered.length)
+     
       if(paginaActual === Math.ceil(dogFiltered.length/8)) return;
       
       let nextPage = paginaActual + 1
@@ -142,13 +141,31 @@ export const ContainerPrincipal = () => {
       dispatch(paginationDogs(Math.ceil(dogFiltered.length/8)))
     }
 
+    let paginasTotales= Math.ceil(dogFiltered.length/SHOW_DOGS)
+
+
+    let pagIndex = []
+
+for(let i = 1; i <= paginasTotales; i++){
+  let btn = <button value={i} onClick={onClickbtn}>{i}</button>
+  pagIndex.push(btn)
+
+
+
+  }
+  function onClickbtn(e) {
+    let pagina = e.target.value
+    dispatch(numberPage(Number(pagina)))
+  }
+
+
   return (
     <div>
       
         <SearchBar/>
         <Sorter onSelectChange={onSelectChange} orden={orden}/>
         <Filter  onClickRemoveFilters={onClickRemoveFilters} OnChangeTemperaments={OnChangeTemperaments} OnChangeDogs={OnChangeDogs} temperaments={temperaments} selectT={selectT}/>
-        <Razas lastHandler={lastHandler} firstHandler={firstHandler} razas={dogsPag} cargando={cargando} paginaActual={paginaActual} prevHandler={prevHandler} nextHandler={nextHandler} />
+        <Razas lastHandler={lastHandler} firstHandler={firstHandler} razas={dogsPag} cargando={cargando} paginaActual={paginaActual} prevHandler={prevHandler} nextHandler={nextHandler} totalDogs={dogFiltered} onClickbtn={onClickbtn} paginas={pagIndex}/>
 
     </div>
   )

@@ -1,12 +1,5 @@
 import axios from 'axios';
-export const FETCH_RAZAS = "FETCH_RAZAS"
-export const SEARCH_RAZAS = "SEARCH_RAZAS"
-export const TEMPERAMENTS = "TEMPERAMENTS"
-export const SORT_DOGS = "SORT_DOGS"
-export const FILTER_DOGSTEMPERAMENTS = "FILTER_DOGSTEMPERAMENTS"
-export const FILTER_DOGS = "FILTER_DOGS"
-export const PAG_DOGS = "PAG_DOGS"
-export const GET_DETAILS = "GET_DETAILS"
+import {NUMBER_PAGE, SEARCH_RAZAS, TEMPERAMENTS, SORT_DOGS, FILTER_DOGSTEMPERAMENTS, FILTER_DOGS, PAG_DOGS,  GET_DETAILS, FETCH_RAZAS} from '../../constantes'
 
 export const fetchRazas = () => {
     return function (dispatch) {
@@ -86,4 +79,6 @@ export const filterDogs = (filtro) =>{
   export const paginationDogs = (payload) => {
     return {type: PAG_DOGS, payload}
   }
-
+export const numberPage = (payload) => {
+  return {type: NUMBER_PAGE, payload} 
+}

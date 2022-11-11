@@ -21,7 +21,7 @@ export const Detail = (props) => {
     
     
           }, [dispatch,props.match.params.id])
-    console.log("hola")
+    
   return (
     <div>
 {<DogCardDetail name={razaDetalle.Name} image={razaDetalle.Img} temperaments={razaDetalle.temperamentos} weightMax={razaDetalle.Weight_max} weightMin={razaDetalle.Weight_min} key={razaDetalle.ID} heightMin={razaDetalle.Height_min} heightMax={razaDetalle.Height_max} lifeSpan={razaDetalle.Life_span}

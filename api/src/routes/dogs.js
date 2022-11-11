@@ -38,12 +38,12 @@ router.get('/', async (req, res, next) => {
                 return {
                     ID: info.Id,
                     Name: info.Name,
-                    Height_max: info.Height_max,
-                    Height_min: info.Height_min,
-                    Weight_max: info.Weight_max,
-                    Weight_min: info.Weight_min,
+                    Height_max: Number(info.Height_max),
+                    Height_min: Number(info.Height_min),
+                    Weight_max: Number(info.Weight_max),
+                    Weight_min: Number(info.Weight_min),
                     Life_span: info.Life_span,
-                    Img: info.Image,
+                    Img: info.Img,
                     temperamentos: temperamentos
                    
 
@@ -119,7 +119,7 @@ router.get('/', async (req, res, next) => {
                     Weight_max: info.Weight_max,
                     Weight_min: info.Weight_min,
                     Life_span: info.Life_span,
-                    Img: info.Image,
+                    Img: info.Img,
                     temperamentos: temperamentos
                    
 
@@ -231,7 +231,7 @@ router.get('/:idRaza', async (req, res, next) => {
                     Weight_max: Number(razaDB.Weight_max),
                     Weight_min: Number(razaDB.Weight_min),
                     Life_span:  razaDB.Life_span,
-                    Img: razaDB.Image,
+                    Img: razaDB.Img,
                   temperamentos: [razaDB.temperamentos.map(nombre => {return nombre.NameT  + " "})]
                     
                 }
@@ -258,7 +258,7 @@ router.get('/:idRaza', async (req, res, next) => {
 router.post('/', async (req, res, next) => {
     try {
         const { Name, Height_max, Height_min, Weight_max, Weight_min,
-            Life_span, NameT } = req.body;
+            Life_span, NameT, Img } = req.body;
         const newRaza = await Raza.create({
             Name,
             Height_max,
@@ -266,7 +266,7 @@ router.post('/', async (req, res, next) => {
             Weight_max,
             Weight_min,
             Life_span,
-            Image: "https://images.dog.ceo/breeds/hound-plott/hhh_plott002.JPG"
+            Img
 
 
         })

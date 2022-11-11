@@ -1,4 +1,4 @@
-import { NUMBER_PAGE, SHOW_DOGS, FETCH_RAZAS, FILTER_DOGSTEMPERAMENTS, SEARCH_RAZAS, SORT_DOGS, TEMPERAMENTS, FILTER_DOGS, PAG_DOGS, GET_DETAILS } from "../../constantes"
+import { POST_DOGS, NUMBER_PAGE, SHOW_DOGS, FETCH_RAZAS, FILTER_DOGSTEMPERAMENTS, SEARCH_RAZAS, SORT_DOGS, TEMPERAMENTS, FILTER_DOGS, PAG_DOGS, GET_DETAILS } from "../../constantes"
 
 const initialState = {
 
@@ -137,6 +137,7 @@ export default function reducer(state = initialState, action) {
                     ...state,
                     currentPage: action.payload
                 }   
+           
 
 
         default: return state

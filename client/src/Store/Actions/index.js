@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {NUMBER_PAGE, SEARCH_RAZAS, TEMPERAMENTS, SORT_DOGS, FILTER_DOGSTEMPERAMENTS, FILTER_DOGS, PAG_DOGS,  GET_DETAILS, FETCH_RAZAS} from '../../constantes'
+import {POST_DOGS, NUMBER_PAGE, SEARCH_RAZAS, TEMPERAMENTS, SORT_DOGS, FILTER_DOGSTEMPERAMENTS, FILTER_DOGS, PAG_DOGS,  GET_DETAILS, FETCH_RAZAS} from '../../constantes'
 
 export const fetchRazas = () => {
     return function (dispatch) {
@@ -81,4 +81,27 @@ export const filterDogs = (filtro) =>{
   }
 export const numberPage = (payload) => {
   return {type: NUMBER_PAGE, payload} 
+}
+
+
+export const postDog = (payload) => {
+  console.log(payload)
+  return async function() {
+    await axios.post('http://localhost:3001/api/dogs', {
+      Name: payload.Name,
+      Height_max: payload.Height_max,
+      Height_min: payload.Height_min,
+      Weight_max: payload.Weight_max,
+      Weight_min: payload.Weight_min,
+      Life_span: payload.Life_span,
+      NameT: payload.temperamentos,
+      Img: payload.Img
+    })
+    .then((response) => {
+      console.log(response)
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+  }
 }

@@ -8,3 +8,4 @@ export const PAG_DOGS = "PAG_DOGS"
 export const GET_DETAILS = "GET_DETAILS"
 export const SHOW_DOGS = 8
 export const NUMBER_PAGE = "NUMBER_PAGE"
+export const POST_DOGS= "POST_DOGS"

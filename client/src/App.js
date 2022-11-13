@@ -12,7 +12,7 @@ function App() {
       <Route exact path ='/home' component={ContainerPrincipal}/>
       <Route exact path ='/form' component={Form}/>
       <Route exact path ='/home/:id' component ={Detail}/>
-  </Switch>
+        </Switch>
     </div>
   );
 }

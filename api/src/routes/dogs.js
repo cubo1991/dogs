@@ -10,7 +10,7 @@ const router = Router();
 
 router.get('/', async (req, res, next) => {
     const { name } = req.query
-    const { idRaza } = req.params
+
 
     try {
       
@@ -44,7 +44,7 @@ router.get('/', async (req, res, next) => {
                     Weight_min: Number(info.Weight_min),
                     Life_span: info.Life_span,
                     Img: info.Img,
-                    temperamentos: temperamentos
+                    temperamentos: [temperamentos]
                    
 
 
@@ -120,7 +120,7 @@ router.get('/', async (req, res, next) => {
                     Weight_min: info.Weight_min,
                     Life_span: info.Life_span,
                     Img: info.Img,
-                    temperamentos: temperamentos
+                    temperamentos: [temperamentos]
                    
 
 
@@ -259,25 +259,49 @@ router.post('/', async (req, res, next) => {
     try {
         const { Name, Height_max, Height_min, Weight_max, Weight_min,
             Life_span, NameT, Img } = req.body;
-        const newRaza = await Raza.create({
-            Name,
-            Height_max,
-            Height_min,
-            Weight_max,
-            Weight_min,
-            Life_span,
-            Img
-
-
-        })
+            let NamesT = []
+            let nuevoEstado = [...NamesT, NameT]
+            console.log(NameT)
+            console.log(nuevoEstado)
+            let newRaza;
+         
+            if(!Img) { 
+                 newRaza = await Raza.create({
+                    Name,
+                    Height_max,
+                    Height_min,
+                    Weight_max,
+                    Weight_min,
+                    Life_span,
+                    Img: "https://images.dog.ceo/breeds/groenendael/n02105056_3499.jpg"
+                    
         
+        
+                })
+            } else {
+                 newRaza = await Raza.create({
+                    Name,
+                    Height_max,
+                    Height_min,
+                    Weight_max,
+                    Weight_min,
+                    Life_span,
+                    Img
+                    
+        
+        
+                })
+                
+            }
+       
         if (NameT) {
             let temperamento = await Temperamento.findAll({
                 where: { NameT: NameT },
                 attributes: ["NameT"]
             })
-            newRaza.addTemperamento(temperamento)
+                        newRaza.addTemperamento(temperamento)
         }
+        
         res.send(newRaza)
     } catch (error) {
         next(error)

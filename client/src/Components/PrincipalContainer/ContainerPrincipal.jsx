@@ -2,10 +2,13 @@ import React from 'react'
 import { Filter } from '../Filter&Sorter/Filter'
 import { Sorter } from '../Filter&Sorter/Sorter'
 import { Razas } from '../Razas/Razas'
-import { SearchBar } from '../SearchBar/SearchBar'
+import {Loading} from '../Loading/Loading'
+
 import { useDispatch, useSelector } from 'react-redux'
 import {numberPage, fetchRazas,getTemperaments, filterDogs,filterDogsTemperaments,sortDogs, paginationDogs} from '../../Store/Actions'
 import { SHOW_DOGS } from '../../constantes'
+import { NavBar } from '../NavBar/NavBar'
+import s from './ContainerPrincipal.module.css'
 
 export const ContainerPrincipal = () => {
   
@@ -118,6 +121,7 @@ export const ContainerPrincipal = () => {
       if(paginaActual === 1 ) return;
       let prevPage = paginaActual - 1
       dispatch(paginationDogs(prevPage))
+      window.location = '#hojaActual'
 
       
     }
@@ -128,17 +132,20 @@ export const ContainerPrincipal = () => {
       let nextPage = paginaActual + 1
      
       dispatch(paginationDogs(nextPage))
+      window.location = '#hojaActual'
     }
     const firstHandler = () => {
-     
+      if(paginaActual === 1 ) return;
  
      
       dispatch(paginationDogs(1))
+      window.location = '#hojaActual'
     }
     const lastHandler = () => {
-     
+      if(paginaActual === Math.ceil(dogFiltered.length/8)) return;
      
       dispatch(paginationDogs(Math.ceil(dogFiltered.length/8)))
+      window.location = '#hojaActual'
     }
 
     let paginasTotales= Math.ceil(dogFiltered.length/SHOW_DOGS)
@@ -160,12 +167,21 @@ for(let i = 1; i <= paginasTotales; i++){
 
 
   return (
-    <div>
-      
-        <SearchBar/>
+    <div className={s.container}>
+          
+        {
+          !cargando
+          ?
+          <div>
+        <NavBar/> 
         <Sorter onSelectChange={onSelectChange} orden={orden}/>
         <Filter  onClickRemoveFilters={onClickRemoveFilters} OnChangeTemperaments={OnChangeTemperaments} OnChangeDogs={OnChangeDogs} temperaments={temperaments} selectT={selectT}/>
         <Razas lastHandler={lastHandler} firstHandler={firstHandler} razas={dogsPag} cargando={cargando} paginaActual={paginaActual} prevHandler={prevHandler} nextHandler={nextHandler} totalDogs={dogFiltered} onClickbtn={onClickbtn} paginas={pagIndex}/>
+        </div>
+          :
+         <Loading/>
+      } 
+
 
     </div>
   )

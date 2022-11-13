@@ -4,22 +4,22 @@ import React from 'react'
 export const Filter = ({onClickRemoveFilters,  OnChangeTemperaments,  OnChangeDogs,  temperaments, selectT }) => {
 
 
-    let defaultValue = "Selecciona un temperamento"
+    let defaultValue = "Select temperament"
 
     return (
         <div>
            
         <div>
             <div>
-         <h5>Filtrar por perros</h5>
-          <button onClick={OnChangeDogs} value={"Api"}>{"Ver razas de perros"}</button>
-          <button onClick={OnChangeDogs} value={"DB"}>{"Ver tus perros"}</button>
+         <h5>Filter by dogs</h5>
+          <button onClick={OnChangeDogs} value={"Api"}>{"Show breeds"}</button>
+          <button onClick={OnChangeDogs} value={"DB"}>{"Show your own dogs"}</button>
           </div>         
             
                 
 
 <div>
-<h5>Filtrar por temperamentos</h5>
+<h5>Filter by temperaments</h5>
             <select name="select" id='selectT' value={selectT} onChange={OnChangeTemperaments}>
                 <option  disabled defaultValue={defaultValue} hidden>{defaultValue}</option>
                 
@@ -30,7 +30,7 @@ export const Filter = ({onClickRemoveFilters,  OnChangeTemperaments,  OnChangeDo
             </div>
             <div>                
                     
-                <button onClick={onClickRemoveFilters}> Quitar filtros </button>
+                <button onClick={onClickRemoveFilters}> Remove filters </button>
             </div>
 
 

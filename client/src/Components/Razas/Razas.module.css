@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+.container {
+    display: flex;   
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    
+ }
+ 
+ .columnasDogs{
+    display: grid;
+    grid-template-columns: repeat(4, 2fr);
+ }
+
+ .btnIndex{
+   display: flex;
+   margin-left: 9%;
+   color: red;
+   border-radius: 20px;
+   
+ }
+
+ .btnIndex button{
+   font-family: 'Dancing Script';
+   width: 2rem;
+   font-size: xx-large;
+   padding: 3px;
+   width: fit-content;
+   border-radius: 20px;
+   background-color: rgba(255, 228, 196, 0.463);
+   border: 0px;
+  
+   
+ }
+ .index button{
+   
+   margin: 2px;
+   font-size: x-large;
+ }
+ .pageNumber{
+   font-family: 'Robot Slab';
+   font-weight:700;
+   font-size: xx-large;
+   position: relative;
+   left: 48%;
+   color:  rgba(255, 228, 196, 0.463);;
+   width: fit-content;
+   border-radius: 12px;
+   background-color: rgba(24, 24, 23, 0.719);
+   
+   
+ }
+ .btnHandler {
+   margin: 10px;
+
+ }
+ 

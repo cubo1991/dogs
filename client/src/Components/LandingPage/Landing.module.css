@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap');
+body{
+    background-color: bisque;
+}
+.container {
+    height:96vh ;
+    width: 98vw;
+    background-image: url(../../multimedia/gifInicio.gif);
+    background-repeat:no-repeat;
+    background-position: center;
+    
+    
+}
+.btn {
+    
+   background-color: transparent;
+   position:relative;
+   left: 49%;
+   top:26%;
+   border-radius: 80%;
+   width: 7.6%;
+   height: 12.7%;
+   border:none ;
+
+    
+}
+
+.titulo {
+    font-family: 'Roboto Slab';
+    position:relative;
+    left: 42%;
+    text-decoration: none;
+    width: fit-content;
+    
+}
+.subTitulo {
+    font-family: 'Dancing Script';
+    position:relative;
+    left: 42%;
+    bottom: 5%;
+    font-size: xx-large;
+    text-decoration: none;
+    width: fit-content;
+
+}
+a:link {
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+    cursor: url(../../multimedia/paws.png), auto;
+}
+a{
+    color: black 
+}
+button:hover {
+    cursor: url(../../multimedia/paws.png), auto;
+}

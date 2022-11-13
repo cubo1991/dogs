@@ -17,7 +17,7 @@ setSearch(e.target.value)
     <div>
         <form onSubmit={onSubmit}>
         <input type="text" onChange={onInputChange} value={search}/> 
-        <input type="submit" value="Buscar" /> 
+        <input type="submit" value="Search" /> 
         </form>
     </div>
   )

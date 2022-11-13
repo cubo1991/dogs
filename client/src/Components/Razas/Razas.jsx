@@ -1,38 +1,40 @@
 import React from 'react'
-import { useDispatch } from 'react-redux'
-import { SHOW_DOGS } from '../../constantes'
 import { DogCard } from '../DogsCards/DogCard'
-import {numberPage} from '../../Store/Actions'
+import s from '../Razas/Razas.module.css'
 
 
-export const Razas = ({ razas, cargando, paginaActual, nextHandler, prevHandler, lastHandler, firstHandler, totalDogs, onClickbtn,  paginas }) => {
 
-  const dogsRazas = razas.map((dog) => { return <DogCard name={dog.Name} image={dog.Img} temperaments={dog.temperamentos} weightMax={dog.Weight_max} weightMin={dog.Weight_min} key={dog.ID} /> })
+export const Razas = ({ razas, paginaActual, nextHandler, prevHandler, lastHandler, firstHandler, paginas }) => {
 
-
- 
+  const dogsRazas = razas.map((dog) => { return <DogCard name={dog.Name} image={dog.Img} temperaments={dog.temperamentos} weightMax={dog.Weight_max} weightMin={dog.Weight_min} key={dog.ID} id={dog.ID} /> })
 
 
-  return (<div>
+
+
+
+  return (<div className={s.container}>
 
     {typeof razas !== 'string'
       ?
-      <div>
+      <div >
         {
-          cargando
-            ?
-            <h2>Por favor espere</h2>
-            :
-            <div>
-              <div> 
-                <button onClick={firstHandler}> Primera página</button>
-                <button onClick={prevHandler}> Prev</button>  <h5>{paginas}</h5> <h3>Página: {paginaActual} </h3>  <button onClick={nextHandler}> Sig</button>
-                <button onClick={lastHandler}>Última página</button>
-              
-              </div>
+          <div >
+            
+            <h3 className={s.pageNumber}>Page: {paginaActual} </h3>
+          
+            <div className={s.columnasDogs}>
               {dogsRazas}
+            </div>
+            <h3 className={s.pageNumber}>Page:  {paginaActual}   </h3>
+            <div className={s.btnIndex}>
+             <button className={s.btnHandler} onClick={firstHandler}> First page</button>
+              <button className={s.btnHandler} onClick={prevHandler}> Prev</button>  <h5 className={s.index}>{paginas}</h5>   <button className={s.btnHandler} onClick={nextHandler}> Next</button>
+              <button className={s.btnHandler} onClick={lastHandler}>Last page</button>
 
             </div>
+            
+
+          </div>
 
 
 

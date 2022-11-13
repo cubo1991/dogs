@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap');
+.container{
+  
+    width: 100vw;
+   height: 100vh;
+   /* background-image: url(../../multimedia/dogFondo-min.jpg);
+   background-repeat: no-repeat;
+   background-position: center ;
+   background-size: cover; */
+   background-color: bisque;
+
+
+}
+.contenido h2 {
+    font-family: 'Dancing Script';
+}
+.contenido {
+    position: relative;
+    top: 40%;
+    text-align: center;
+   
+}
+.dogLoading {
+border-radius: 0%;
+    width: 15rem;
+    height: 15rem;
+}

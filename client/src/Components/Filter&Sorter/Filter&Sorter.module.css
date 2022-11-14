@@ -1,0 +1,56 @@
+.containerFilter{
+   display: flex;
+   justify-content:stretch;
+}
+
+.containerElement {
+    margin: 10px;
+}
+
+ select {
+    margin-left: 10px;
+    border-radius: 20px;
+    background-color: rgba(255, 228, 196, 0.463);
+    appearance: none;
+    height: 2rem;
+    text-align: center;
+    font-size: medium;
+    font-family: 'Roboto Slab';
+    
+}
+
+
+.containerElement button {
+    margin-left: 10px;
+    font-family: 'Roboto Slab';
+   width: 2rem;
+   font-size: medium;
+   padding: 3px;
+   width: fit-content;
+   border-radius: 20px;
+   background-color: rgba(255, 228, 196, 0.463);
+   border: 0px;
+   text-align: center;
+  
+
+}
+.containerElement option{
+    background-color: rgba(255, 228, 196, 0.463);
+    border: 0px; 
+    
+}
+
+ label {
+    font-family: 'Dancing Script';
+    font-size: x-large;
+}
+
+.remove {
+  margin: 3px;
+  
+}
+
+.sorter{
+margin: 5rem;
+margin-left: 19rem
+}

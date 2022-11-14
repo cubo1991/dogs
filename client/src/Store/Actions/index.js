@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {POST_DOGS, NUMBER_PAGE, SEARCH_RAZAS, TEMPERAMENTS, SORT_DOGS, FILTER_DOGSTEMPERAMENTS, FILTER_DOGS, PAG_DOGS,  GET_DETAILS, FETCH_RAZAS} from '../../constantes'
+import { NUMBER_PAGE, SEARCH_RAZAS, TEMPERAMENTS, SORT_DOGS, FILTER_DOGSTEMPERAMENTS, FILTER_DOGS, PAG_DOGS,  GET_DETAILS, FETCH_RAZAS} from '../../constantes'
 
 export const fetchRazas = () => {
     return function (dispatch) {
@@ -18,6 +18,7 @@ export const fetchRazas = () => {
 }
 
 export const getDetails = (id) => {
+
   return function (dispatch) {
     axios.get('http://localhost:3001/api/dogs/' + id)
     .then((raza) => {

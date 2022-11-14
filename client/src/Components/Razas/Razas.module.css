@@ -5,6 +5,7 @@
     flex-direction: column;
     align-items: center;
     align-content: center;
+    margin-top: 10rem;
     
  }
  
@@ -16,8 +17,7 @@
  .btnIndex{
    display: flex;
    margin-left: 9%;
-   color: red;
-   border-radius: 20px;
+      border-radius: 20px;
    
  }
 

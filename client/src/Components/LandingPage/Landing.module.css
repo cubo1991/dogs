@@ -54,3 +54,7 @@ a{
 button:hover {
     cursor: url(../../multimedia/paws.png), auto;
 }
+
+select:hover {
+    cursor: url(../../multimedia/paws.png), auto;
+}

@@ -23,7 +23,8 @@ export default function reducer(state = initialState, action) {
                 razas: action.payload,
                 dogsFiltered: action.payload,
                 dogsPag: action.payload.slice((state.currentPage-1)*SHOW_DOGS,state.currentPage*SHOW_DOGS),
-                cargando: false
+                cargando: false,
+                
 
             }
         case SEARCH_RAZAS:
@@ -128,7 +129,8 @@ export default function reducer(state = initialState, action) {
                 
             }
             case GET_DETAILS:
-                return{
+           
+            return{
                     ...state,
                     dogDetail: action.payload
                 }

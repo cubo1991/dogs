@@ -1,4 +1,5 @@
 import React from 'react'
+import { NavBar } from '../NavBar/NavBar'
 
 export const DogCardDetail = ({name, image, temperaments, weightMin, weightMax, heightMin, heightMax, lifeSpan}) => {
 
@@ -7,7 +8,10 @@ export const DogCardDetail = ({name, image, temperaments, weightMin, weightMax, 
   return (
     
     <div>
+          <NavBar/>
+{
 
+            <div>
             <h2>{name}</h2>
             <img src={image} alt={name}/>
             <h3>Weight Min: {weightMin}</h3>
@@ -16,6 +20,8 @@ export const DogCardDetail = ({name, image, temperaments, weightMin, weightMax, 
             <h3>Height Max: {heightMax} </h3>
             <h3>Life Span:  {lifeSpan}</h3>
             <h3>Temperaments: {temperaments} </h3>
+            </div>
+            }
             
     </div>
   )

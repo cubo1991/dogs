@@ -163,6 +163,7 @@ for(let i = 1; i <= paginasTotales; i++){
   function onClickbtn(e) {
     let pagina = e.target.value
     dispatch(numberPage(Number(pagina)))
+    window.location = '#hojaActual'
   }
 
 
@@ -174,9 +175,13 @@ for(let i = 1; i <= paginasTotales; i++){
           ?
           <div>
         <NavBar/> 
-        <Sorter onSelectChange={onSelectChange} orden={orden}/>
+        <div className={s.btns}>
         <Filter  onClickRemoveFilters={onClickRemoveFilters} OnChangeTemperaments={OnChangeTemperaments} OnChangeDogs={OnChangeDogs} temperaments={temperaments} selectT={selectT}/>
+        <Sorter onSelectChange={onSelectChange} orden={orden}/>
+      
+        </div>
         <Razas lastHandler={lastHandler} firstHandler={firstHandler} razas={dogsPag} cargando={cargando} paginaActual={paginaActual} prevHandler={prevHandler} nextHandler={nextHandler} totalDogs={dogFiltered} onClickbtn={onClickbtn} paginas={pagIndex}/>
+        
         </div>
           :
          <Loading/>

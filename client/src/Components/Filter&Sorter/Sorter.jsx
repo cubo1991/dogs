@@ -1,4 +1,5 @@
 import React from 'react'
+import s from './Filter&Sorter.module.css'
 
 
 export const Sorter = ({onSelectChange, orden}) => {
@@ -9,7 +10,7 @@ export const Sorter = ({onSelectChange, orden}) => {
     
   return (
     <div>
-        <div>
+        <div className={s.sorter}>
     <label htmlFor="Sort">Order by </label>   
     <select name="select" id="Sort" value={defaultValue} onChange={onSelectChange}> 
     <option  disabled defaultValue={defaultValue} hidden>{defaultValue}</option>

@@ -75,7 +75,7 @@ const Form = () => {
 
   }
 
-console.log(formRes)
+
 
 
   return (

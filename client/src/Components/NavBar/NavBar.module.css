@@ -1,3 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap');
 .container {
     display: flex;
+    justify-content: space-between;
+    background-color: rgba(255, 228, 196, 0.61);
+    z-index: 99999;
+    position:fixed;
+    width: 98.8vw;
+   
+    
+   
+}
+
+.navBar {
+    display: flex;
+    margin-top: 0.5rem;
+    padding-right: 4rem;
+    padding-left: 4rem;
+}
+
+.link{
+    font-family: 'Dancing Script';
+    font-size: xx-large;
+    margin-top: -0.5rem;
+}
+
+.search{
+    margin-right: 12.5rem;
 }

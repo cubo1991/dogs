@@ -1,0 +1,26 @@
+.searchBtn{
+
+    margin-left: 10px;
+    font-family: 'Roboto Slab';
+   width: 2rem;
+   font-size: medium;
+   padding: 3px;
+   width: fit-content;
+   border-radius: 20px;
+   background-color: rgba(255, 228, 196, 0.463);
+   border: 0px;
+   text-align: center;
+}
+
+.search{
+
+    margin-left: 10px;
+    font-family: 'Roboto Slab';
+   width: 2rem;
+   font-size: medium;
+   padding: 3px;
+   width: fit-content;
+   border-radius: 20px;
+   border: 3px white;
+   text-align: center;
+}

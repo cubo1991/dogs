@@ -18,7 +18,7 @@ export const Razas = ({ razas, paginaActual, nextHandler, prevHandler, lastHandl
       ?
       <div >
         {
-          <div >
+          <div id='hojaActual' >
             
             <h3 className={s.pageNumber}>Page: {paginaActual} </h3>
           

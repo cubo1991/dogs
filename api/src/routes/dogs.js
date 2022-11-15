@@ -10,12 +10,8 @@ const router = Router();
 
 router.get('/', async (req, res, next) => {
     const { name } = req.query
-
-
     try {
-      
         let razaApis = await axios.get(`https://api.thedogapi.com/v1/breeds?api_key=${API_KEY}`)
-
         if (!name) {
             let razaDB = await Raza.findAll({
                 include: {
@@ -29,12 +25,9 @@ router.get('/', async (req, res, next) => {
 
           
             let razaDBMap = razaDB.map((info) => {
-                
                 let temperamentos = info.temperamentos.map((t) => {
                     return t.NameT
                 })
-                 
-              
                 return {
                     ID: info.Id,
                     Name: info.Name,
@@ -45,13 +38,8 @@ router.get('/', async (req, res, next) => {
                     Life_span: info.Life_span,
                     Img: info.Img,
                     temperamentos: [temperamentos]
-                   
-
-
 
                 }
-
-
 
             })
 
@@ -61,18 +49,12 @@ router.get('/', async (req, res, next) => {
                 for(let i = 0; i < temperamentoSplit.length; i++){
                    
                 if (temperamentoSplit[i][0] === " ") {
-                    
                     temperamentoSplit[i] = temperamentoSplit[i].slice(1)
-                    
                     nuevoTemperamentos = [...nuevoTemperamentos, temperamentoSplit[i]]
-                    
-
                 }
                 else { nuevoTemperamentos = [...nuevoTemperamentos, temperamentoSplit[i]] 
                     }
                 }
-                
-               
 
                 return {
                     ID: info.id,
@@ -109,7 +91,6 @@ router.get('/', async (req, res, next) => {
                 let temperamentos = info.temperamentos.map((t) => {
                     return t.NameT
                 })
-
               
                 return {
                     ID: info.Id,
@@ -121,13 +102,7 @@ router.get('/', async (req, res, next) => {
                     Life_span: info.Life_span,
                     Img: info.Img,
                     temperamentos: [temperamentos]
-                   
-
-
-
                 }
-
-
 
             })
             let razasdeApi = razaApis.data.map((info) => {
@@ -136,12 +111,8 @@ router.get('/', async (req, res, next) => {
                 for(let i = 0; i < temperamentoSplit.length; i++){
                    
                 if (temperamentoSplit[i][0] === " ") {
-                    
                     temperamentoSplit[i] = temperamentoSplit[i].slice(1)
-                    
                     nuevoTemperamentos = [...nuevoTemperamentos, temperamentoSplit[i]]
-                    
-
                 }
                 else { nuevoTemperamentos = [...nuevoTemperamentos, temperamentoSplit[i]] 
                     }
@@ -161,17 +132,10 @@ router.get('/', async (req, res, next) => {
                 }
             })
             let apiFiltrado = razasdeApi.filter(n => n.Name.toUpperCase().includes(name.toUpperCase()) === true)
-            
-            
             let razas = [...apiFiltrado,...razaDBMap]
             if (razas.length === 0) { res.send(["No breed with that name has been found"]) } else {
                 res.send(razas)
             }
-
-
-
-
-
         }
         
 
@@ -207,7 +171,6 @@ router.get('/:idRaza', async (req, res, next) => {
                     temperamentos: [busqueda.temperament.split(',')]
                     
                 }
-                console.log(dogsData)
                 res.send(dogsData) } else {
                 res.status(404).send("Esta página no existe")
             }
@@ -235,23 +198,15 @@ router.get('/:idRaza', async (req, res, next) => {
                   temperamentos: [razaDB.temperamentos.map(nombre => {return nombre.NameT  + " "})]
                     
                 }
-                console.log(dogsData)
-                
                 res.send(dogsData) } else {
                 res.status(404).send("Esta página no existe")
             }
-
-            
-
         }
     } catch (error) {
         error.message = "Esta página no existe"
         error.status = 404
         next(error)
-
-
     }
-
 
 })
 
@@ -259,10 +214,6 @@ router.post('/', async (req, res, next) => {
     try {
         const { Name, Height_max, Height_min, Weight_max, Weight_min,
             Life_span, NameT, Img } = req.body;
-            let NamesT = []
-            let nuevoEstado = [...NamesT, NameT]
-            console.log(NameT)
-            console.log(nuevoEstado)
             let newRaza;
          
             if(!Img) { 
@@ -274,9 +225,7 @@ router.post('/', async (req, res, next) => {
                     Weight_min,
                     Life_span,
                     Img: "https://images.dog.ceo/breeds/groenendael/n02105056_3499.jpg"
-                    
-        
-        
+      
                 })
             } else {
                  newRaza = await Raza.create({
@@ -287,9 +236,6 @@ router.post('/', async (req, res, next) => {
                     Weight_min,
                     Life_span,
                     Img
-                    
-        
-        
                 })
                 
             }
@@ -308,13 +254,5 @@ router.post('/', async (req, res, next) => {
     }
 
 })
-
-
-
-
-
-
-
-
 
 module.exports = router;

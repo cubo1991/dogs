@@ -31,13 +31,9 @@ router.get('/', async (req, res, next) => {
 
             for (let i = 0; i < arrayTemperamentos.length; i++) {
 
-                if (arrayTemperamentos[i][0] === " ") {
-                    
+                if (arrayTemperamentos[i][0] === " ") {                    
                     arrayTemperamentos[i] = arrayTemperamentos[i].slice(1)
-                    
                     nuevoTemperamentos.push(arrayTemperamentos[i])
-                    
-
                 }
                 else { nuevoTemperamentos.push(arrayTemperamentos[i]) 
                     }
@@ -47,12 +43,9 @@ router.get('/', async (req, res, next) => {
 
      
         let setnuevoTemperamentos = new Set(nuevoTemperamentos)
-        
         let temperaments = Array.from(setnuevoTemperamentos)
-        
         for (let i = 0; i < temperaments.length; i++) {
             await Temperamento.create({
-
 
                 NameT: temperaments[i]
 

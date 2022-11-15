@@ -1,28 +1,37 @@
 import React from 'react'
 import { NavBar } from '../NavBar/NavBar'
+import s from './DogCardDetail.module.css'
 
-export const DogCardDetail = ({name, image, temperaments, weightMin, weightMax, heightMin, heightMax, lifeSpan}) => {
+export const DogCardDetail = ({ name, image, temperaments, weightMin, weightMax, heightMin, heightMax, lifeSpan }) => {
 
 
 
   return (
-    
+<div >
     <div>
-          <NavBar/>
-{
+      <div >
+      <NavBar/>
+      </div>
 
-            <div>
-            <h2>{name}</h2>
-            <img src={image} alt={name}/>
-            <h3>Weight Min: {weightMin}</h3>
-            <h3>Weight Max: {weightMax}</h3>
-            <h3>Height Min: {heightMin} </h3>
-            <h3>Height Max: {heightMax} </h3>
-            <h3>Life Span:  {lifeSpan}</h3>
+
+
+      <div className={s.container}>
+        <h2 className={s.name}>{name}</h2>
+        <div className={s.card}>
+          <img src={image} alt={name} />
+          <div className={s.info}>
+            <h3>Weight Min: {weightMin} kg</h3>
+            <h3>Weight Max: {weightMax} kg</h3>
+            <h3>Height Min: {heightMin} cm </h3>
+            <h3>Height Max: {heightMax} cm </h3>
+            <h3>Life Span:  {lifeSpan} years</h3>
             <h3>Temperaments: {temperaments} </h3>
-            </div>
-            }
-            
+          </div>
+        </div>
+      </div>
+
+
+    </div>
     </div>
   )
 }

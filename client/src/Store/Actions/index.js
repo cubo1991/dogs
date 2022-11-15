@@ -86,7 +86,7 @@ export const numberPage = (payload) => {
 
 
 export const postDog = (payload) => {
-  console.log(payload)
+
   return async function() {
     await axios.post('http://localhost:3001/api/dogs', {
       Name: payload.Name,

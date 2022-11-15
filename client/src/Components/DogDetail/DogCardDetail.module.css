@@ -1,0 +1,34 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap');
+.container {
+    position: relative;
+    background-color: azure;
+  
+    height: 90vh;
+
+
+}
+.card{
+    display: flex;
+   
+}
+
+.card img{
+    width: 25rem;
+    height: 25rem;
+    position: relative;
+    bottom: 20px;
+}
+
+.name{
+    top:60px;
+    font-family: 'Roboto Slab';
+}
+
+
+.info{
+    margin: 2rem;
+}
+
+.info h3{
+    font-family: 'Roboto Slab';  
+}

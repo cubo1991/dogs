@@ -2,6 +2,7 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getTemperaments, postDog } from '../../Store/Actions'
 import { NavBar } from '../NavBar/NavBar'
+import s from '../Form/Form.module.css'
 
 const Form = () => {
   let dispatch = useDispatch()
@@ -82,9 +83,9 @@ const Form = () => {
    
     <div>
        <NavBar/>
-      <div>
-        <form>
-          <div>
+      <div className={s.form}>
+        <form  >
+          <div >
             <label> Nombre </label>
             <input
 
@@ -171,7 +172,7 @@ const Form = () => {
    
             </select>
             
-            <button onClick={removetemperamentos}> X</button>
+            <button onClick={removetemperamentos}> Borrar todos</button>
           </div>
         </form>
        {

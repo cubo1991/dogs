@@ -2,6 +2,7 @@ import React from 'react'
 import { SearchBar } from '../SearchBar/SearchBar'
 import { Link } from 'react-router-dom'
 import s from '../NavBar/NavBar.module.css'
+import icono from '../../multimedia/icono.png'
 
 export const NavBar = () => {
   return (
@@ -9,7 +10,7 @@ export const NavBar = () => {
       <div className={s.navBar}>
       <Link to='/home'>
 
-        LOGO
+       <img className={s.logo} src={icono}/>
         </Link>
       </div>
 <div className={s.navBar}>

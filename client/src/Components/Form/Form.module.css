@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap');
+.form{
+    position: relative;
+   top: 8rem;
+   left: 30rem
+}
+
+.form label{
+font-family: "Roboto Slab";
+font-size: medium;
+margin: 1rem;
+
+}
+
+.form div {
+ margin-top:0.5rem
+}
+
+.form input {
+    border-radius: 10px;
+    border: 0px;
+}
+
+.form button {
+    background-color: transparent;
+    position: relative;
+    left: 2rem;
+    border-radius: 30%;
+  
+    border:solid 1px ;
+}

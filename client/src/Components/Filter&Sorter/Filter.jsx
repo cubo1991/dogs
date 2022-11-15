@@ -24,7 +24,7 @@ export const Filter = ({ onClickRemoveFilters, OnChangeTemperaments, OnChangeDog
                     
                     <label>Filter by temperaments</label>
                     <select name="select" id='selectT' value={selectT} onChange={OnChangeTemperaments}>
-                    <option disabled defaultValue={defaultValue} hidden>{defaultValue}</option>
+                    <option  defaultValue={defaultValue} hidden>{defaultValue}</option>
 
                     {temperaments.map(t =>
                     <option key={t.NameT} value={t.NameT}>{t.NameT}</option>

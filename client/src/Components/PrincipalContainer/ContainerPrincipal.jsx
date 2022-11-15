@@ -103,10 +103,9 @@ export const ContainerPrincipal = () => {
     if(activadorD) { filtrarD()}
     const onClickRemoveFilters = () => {
        
-         dispatch(filterDogs("removeFilters"))
-        dispatch(filterDogsTemperaments("removeFiltersT"))
+         dispatch(filterDogs("removeFilters"))     
         setSelectT("Selecciona un temperamento")
-        setOrden("Selecciona un criterio")
+        setOrden("")
        
       
     }

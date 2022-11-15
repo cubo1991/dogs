@@ -42,7 +42,7 @@ export default function reducer(state = initialState, action) {
                 temperamentos: action.payload
             }
         case SORT_DOGS:
-            let sortDogs = [...state.razas]
+            let sortDogs = [...state.dogsFiltered]
             
             sortDogs.sort((a, b) => {
                 if (action.payload === "ascendente" || action.payload === "descendente"){

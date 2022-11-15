@@ -8,7 +8,6 @@ const initialState = {
     cargando: true,
     currentPage: 1,
     dogsPag: [],
-    searchedDog: [],
     aux: [],
     dogDetail: [], 
     

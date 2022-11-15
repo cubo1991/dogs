@@ -164,7 +164,7 @@ router.get('/', async (req, res, next) => {
             
             
             let razas = [...apiFiltrado,...razaDBMap]
-            if (razas.length === 0) { res.send("No se ha encontrado ninguna raza con ese nombre") } else {
+            if (razas.length === 0) { res.send(["No breed with that name has been found"]) } else {
                 res.send(razas)
             }
 

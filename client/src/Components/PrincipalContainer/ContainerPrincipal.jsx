@@ -9,6 +9,7 @@ import {numberPage, fetchRazas,getTemperaments, filterDogs,filterDogsTemperament
 import { SHOW_DOGS } from '../../constantes'
 import { NavBar } from '../NavBar/NavBar'
 import s from './ContainerPrincipal.module.css'
+import dog404 from '../../multimedia/error404.jpg'
 
 export const ContainerPrincipal = () => {
   
@@ -174,14 +175,27 @@ for(let i = 1; i <= paginasTotales; i++){
           !cargando
           ?
           <div>
-        <NavBar/> 
+        {typeof dogsPag[0] === "string" 
+        ?
+        <div> 
+          <img className={s.imageDog} src={dog404} alt='Error 404'/>
+        <h2 className={s.noDogs}>{dogsPag[0]}</h2>
+        <button className={s.btnBackHome} onClick={onClickRemoveFilters}> Back to Home</button>
+        </div>
+        :
+      
+       
+        <div>
+            <NavBar/> 
         <div className={s.btns}>
         <Filter  onClickRemoveFilters={onClickRemoveFilters} OnChangeTemperaments={OnChangeTemperaments} OnChangeDogs={OnChangeDogs} temperaments={temperaments} selectT={selectT}/>
         <Sorter onSelectChange={onSelectChange} orden={orden}/>
       
         </div>
+       
         <Razas lastHandler={lastHandler} firstHandler={firstHandler} razas={dogsPag} cargando={cargando} paginaActual={paginaActual} prevHandler={prevHandler} nextHandler={nextHandler} totalDogs={dogFiltered} onClickbtn={onClickbtn} paginas={pagIndex}/>
-        
+        </div>
+        }
         </div>
           :
          <Loading/>

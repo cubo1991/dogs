@@ -18,7 +18,8 @@ margin: 1rem;
 
 .form input {
     border-radius: 10px;
-    border: 0px;
+    border: 10px;
+    outline: none;
 }
 
 .form button {
@@ -28,4 +29,24 @@ margin: 1rem;
     border-radius: 30%;
   
     border:solid 1px ;
+}
+
+.form .inpuMandatory {
+    
+    border: solid red 1px;
+}
+.form .inpuAllowed {
+    
+    border: solid greenyellow 1px;
+}
+
+.form .sendBtn{
+    background-color: transparent;
+    position: relative;
+    left: 3rem;
+    top: 0.5rem;
+    border-radius: 30%;
+    width: 20rem;
+    border:solid 1px ;
+
 }

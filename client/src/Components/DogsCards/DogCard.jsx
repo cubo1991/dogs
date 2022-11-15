@@ -3,7 +3,7 @@ import s from './DogsCards.module.css'
 import { Link } from 'react-router-dom'
 
 export const DogCard = ({name, image, temperaments, weightMin, weightMax, id}) => {
-console.log(temperaments)
+
 
 
 const temperamentos = () =>{

@@ -12,7 +12,11 @@ export const fetchRazas = () => {
         }
 
         
-    )}
+    )
+    .catch((error) => {
+      alert(error)
+    })
+  }
 
 
 }
@@ -28,6 +32,9 @@ export const getDetails = (id) => {
       })
     }
     )
+    .catch((error) => {
+      alert(error)
+    })
   }
 }
 
@@ -57,6 +64,9 @@ export const getTemperaments = () => {
         type: TEMPERAMENTS,
         payload: temperaments.data
       })
+    })
+    .catch((error) => {
+      alert(error)
     })
   }
 
@@ -100,9 +110,12 @@ export const postDog = (payload) => {
     })
     .then((response) => {
       console.log(response)
+      alert("Dog successfully created!")
+
     })
     .catch((error) => {
       console.log(error)
+      alert("Something went wrong...")
     })
   }
 }

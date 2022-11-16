@@ -8,7 +8,6 @@ const initialState = {
     cargando: true,
     currentPage: 1,
     dogsPag: [],
-    aux: [],
     dogDetail: [], 
     
     
@@ -27,14 +26,23 @@ export default function reducer(state = initialState, action) {
 
             }
         case SEARCH_RAZAS:
-            
+     if (typeof action.payload[0] === "string")
+     {
+        return {
+            ...state,
+           
+            dogsFiltered: state.razas,
+            dogsPag: action.payload.slice((state.currentPage-1)*SHOW_DOGS,state.currentPage*SHOW_DOGS),
+            currentPage: 1
+        }
+     }else{
             return {
                 ...state,
                
                 dogsFiltered: action.payload,
-                dogsPag: action.payload,
+                dogsPag: action.payload.slice((state.currentPage-1)*SHOW_DOGS,state.currentPage*SHOW_DOGS),
                 currentPage: 1
-            }
+            }}
         case TEMPERAMENTS:
             return {
                 ...state,
@@ -115,15 +123,15 @@ export default function reducer(state = initialState, action) {
         
          }   
          case PAG_DOGS:
-            
-            if(state.cargando === true) { state.aux = state.razas}
-            else {state.aux = state.dogsFiltered}
+            let aux = []
+            if(state.cargando === true) { aux = state.razas}
+            else {aux = state.dogsFiltered}
          
 
 
             return{
                 ...state,              
-                dogsPag: [...state.aux].slice((state.currentPage-1)*SHOW_DOGS,state.currentPage*SHOW_DOGS),
+                dogsPag: [...aux].slice((state.currentPage-1)*SHOW_DOGS,state.currentPage*SHOW_DOGS),
                 currentPage: action.payload,
                 
             }

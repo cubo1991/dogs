@@ -180,8 +180,7 @@ let history = useHistory()
           ?
           <div>
 
-            {dogsPag.length !== 0
-              ?
+            {
 
               typeof dogsPag[0] === "string"
                 ?
@@ -202,9 +201,7 @@ let history = useHistory()
                   <Razas lastHandler={lastHandler} firstHandler={firstHandler} razas={dogsPag} cargando={cargando} paginaActual={paginaActual} prevHandler={prevHandler} nextHandler={nextHandler} totalDogs={dogFiltered} onClickbtn={onClickbtn} paginas={pagIndex} />
                 </div>
 
-              :
-              
-              goError()
+             
              
              
             }

@@ -5,6 +5,7 @@ import dog404 from '../../multimedia/error404.jpg'
 import s from './Error.module.css'
 
 export const Error = () => {
+  
   let dogsPag = useSelector((state) => state.dogsPag)
   console.log(typeof dogsPag[0])
   return (

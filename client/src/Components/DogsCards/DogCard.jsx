@@ -2,25 +2,15 @@ import React from 'react'
 import s from './DogsCards.module.css'
 import { Link } from 'react-router-dom'
 
-export const DogCard = ({name, image, temperaments, weightMin, weightMax, id}) => {
+export const DogCard = ({name, image, temperaments, weightMin, weightMax, id, key}) => {
 
 
 
-const temperamentos = () =>{
-temperaments[0].map(t => {
-  
-  if(temperaments[0]) {
-    return ( <li>{t}</li>)
-  } else{
-    return ( <li>{temperaments}</li>)
-  }
- }) 
-}
 
 
 
   return (
-    <div className={s.container}>
+    <div className={s.container} key={key}>
  <Link to={'/home/' + id}>
             <h2>{name}</h2> 
             </Link>

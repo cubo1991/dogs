@@ -3,10 +3,12 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getTemperaments, postDog } from '../../Store/Actions'
 import { NavBar } from '../NavBar/NavBar'
 import s from '../Form/Form.module.css'
-import { Link } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
+
 
 const Form = () => {
   let dispatch = useDispatch()
+let history = useHistory()
   React.useEffect(() => {
 
     dispatch(getTemperaments())
@@ -25,7 +27,7 @@ const Form = () => {
 
 
   })
-
+  let [finalizado, setFinalizado] = React.useState(false)
 
   let [formRes, setFormRes] = React.useState({
     Name: '',
@@ -73,14 +75,23 @@ const Form = () => {
   }
   const sendForm = () => {
     dispatch(postDog(formRes))
+    setFinalizado(true)
+    setTimeout(()=>{
+      history.push('/home')
+    }, 5000)
+   
     
 
   }
 
+  
   return (
    
     <div>
        <NavBar/>
+{
+        !finalizado
+        ?
       <div className={s.form}>
         <form  >
           <div >
@@ -190,8 +201,11 @@ const Form = () => {
        </div>
       }
       </div>
+      :
 
+      <h2 className={s.dogFinish}>Dog successfully created! Redirecting in 5 seconds</h2>
 
+}
 
 
     </div>

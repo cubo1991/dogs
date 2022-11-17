@@ -22,6 +22,7 @@ export const ContainerPrincipal = () => {
   let cargando = useSelector((state) => state.cargando)
   let temperaments = useSelector((state) => state.temperamentos)
   let dogsPag = useSelector((state) => state.dogsPag)
+  let error = useSelector((state) => state.errorGlobalState)
   let [selectT, setSelectT] = React.useState("Selecciona un temperamento")
   let [selectD, setSelectD] = React.useState("Api")
   let [orden, setOrden] = React.useState("")
@@ -172,8 +173,8 @@ export const ContainerPrincipal = () => {
 
   }
 
-  console.log(dogsPag)
-  return (
+  if(!error)
+  {return (
     <div className={s.container}>
 
       {
@@ -246,5 +247,10 @@ export const ContainerPrincipal = () => {
 
 
     </div>
-  )
+  )} else {
+
+return(
+ goError()
+)
+  }
 }

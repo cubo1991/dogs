@@ -50,3 +50,11 @@ margin: 1rem;
     border:solid 1px ;
 
 }
+
+.dogFinish {
+    font-family: "Dancing Script";
+    font-size: xx-large;
+    position: relative;
+    top:18rem
+
+}

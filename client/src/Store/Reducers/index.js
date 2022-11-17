@@ -9,13 +9,18 @@ const initialState = {
     currentPage: 1,
     dogsPag: [],
     dogDetail: [], 
-    
+    errorGlobalState: false,
     
 }
 
 export default function reducer(state = initialState, action) {
     switch (action.type) {
         case FETCH_RAZAS:
+           if(action.error) {return{
+            ...state,
+            dogsPag: action.error,
+            errorGlobalState: true
+           } }
             return {
                 ...state,
                 razas: action.payload,

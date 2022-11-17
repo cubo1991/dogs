@@ -6,7 +6,9 @@ import s from '../Razas/Razas.module.css'
 
 export const Razas = ({ razas, paginaActual, nextHandler, prevHandler, lastHandler, firstHandler, paginas }) => {
 
-  const dogsRazas = razas.map((dog) => { return <DogCard name={dog.Name} image={dog.Img} temperaments={dog.temperamentos} weightMax={dog.Weight_max} weightMin={dog.Weight_min} key={dog.ID} id={dog.ID} /> })
+  const dogsRazas = razas.map((dog) => { 
+ 
+    return <DogCard name={dog.Name} image={dog.Img} temperaments={dog.temperamentos} weightMax={dog.Weight_max} weightMin={dog.Weight_min} key={dog.ID} id={dog.ID} /> })
 
 
 

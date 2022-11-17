@@ -14,7 +14,14 @@ export const fetchRazas = () => {
         
     )
     .catch((error) => {
-      alert(error)
+      dispatch({
+        type: FETCH_RAZAS,
+        error: [error],
+        
+      })
+    
+      // alert(error);
+      
     })
   }
 
@@ -33,7 +40,12 @@ export const getDetails = (id) => {
     }
     )
     .catch((error) => {
-      alert(error)
+      dispatch({
+        type: GET_DETAILS,
+        payload: [error],
+        
+      })
+      // alert(error)
     })
   }
 }
@@ -47,11 +59,13 @@ export const searchRaza = (dog) => {
         payload: razas.data
       })
     })
-    .catch((err)=>{
+    .catch((error)=>{
       dispatch({
         type: SEARCH_RAZAS,
-        payload: err
+        payload: [error],
+        
       })
+      // alert(error)
     })
   }
 }
@@ -66,7 +80,13 @@ export const getTemperaments = () => {
       })
     })
     .catch((error) => {
-      alert(error)
+       dispatch({
+        type: TEMPERAMENTS,
+        payload: [error],
+        
+      })
+      
+      // alert(error)
     })
   }
 
@@ -109,12 +129,12 @@ export const postDog = (payload) => {
       Img: payload.Img
     })
     .then((response) => {
-      console.log(response)
-      alert("Dog successfully created!")
+     console.log(response)
+      // alert("Dog successfully created!")
 
     })
     .catch((error) => {
-      console.log(error)
+     console.log(error)
       alert("Something went wrong...")
     })
   }

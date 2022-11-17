@@ -48,3 +48,81 @@ height: fit-content;
    margin-left: 10rem;
 }
 
+.noRace{
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   height: 37.32rem;
+   width: 68rem;
+}
+
+.noRace div {
+   position: relative;
+   
+}
+
+.noRace h2{
+   font-family: 'Dancing Script';
+   background-color: rgba(255, 228, 196, 0.463);
+   height: fit-content;
+   margin-bottom: 5rem;
+}
+
+.noRace h3{
+   font-family: 'Roboto Slab';
+   background-color: rgba(255, 228, 196, 0.463);
+   height: fit-content;
+}
+
+.noRace button {
+   font-family: 'Roboto Slab';
+   width: 2rem;
+   font-size: xx-large;
+   padding: 3px;
+   width: fit-content;
+   border-radius: 20px;
+   background-color: rgba(255, 228, 196, 0.463);
+   border: 0px;
+ 
+}
+
+.noCreateDogs{
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   height: 37.32rem;
+   width: 60rem;
+}
+
+.noCreateDogs div {
+   position: relative;
+   
+}
+
+.noCreateDogs h2{
+   font-family: 'Dancing Script';
+   height: fit-content;
+   margin-bottom: 5rem;
+}
+
+.noCreateDogs h3{
+   font-family: 'Roboto Slab';
+   background-color: rgba(255, 228, 196, 0.463);
+   height: fit-content;
+}
+
+.noCreateDogs button {
+   font-family: 'Roboto Slab';
+   width: 2rem;
+   font-size: xx-large;
+   padding: 35px;
+   width: fit-content;
+   border-radius: 20px;
+   background-color: rgba(255, 228, 196, 0.463);
+   border:  0px;
+   margin-right: 50px;
+  
+
+
+ 
+}

@@ -18,8 +18,17 @@
    display: flex;
    margin-left: 9%;
       border-radius: 20px;
+      align-content:center;
    
  }
+
+ .btnIndexLess{
+  display: flex;
+  margin-left: 24rem;
+     border-radius: 20px;
+     align-content:center;
+  
+}
 
  .btnIndex button{
    font-family: 'Dancing Script';
@@ -33,6 +42,20 @@
   
    
  }
+
+ .btnIndexLess button{
+  font-family: 'Dancing Script';
+  width: 2rem;
+  font-size: xx-large;
+  padding: 3px;
+  width: fit-content;
+  border-radius: 20px;
+  background-color: rgba(255, 228, 196, 0.463);
+  border: 0px;
+ 
+  
+}
+
  .index button{
    
    margin: 2px;

@@ -9,9 +9,10 @@ import { numberPage, fetchRazas, getTemperaments, filterDogs, filterDogsTemperam
 import { SHOW_DOGS } from '../../constantes'
 import { NavBar } from '../NavBar/NavBar'
 import s from './ContainerPrincipal.module.css'
-import dog404 from '../../multimedia/error404.jpg'
 
-import { useHistory } from 'react-router-dom'
+
+import { Link, useHistory } from 'react-router-dom'
+import { Error } from '../Eror/Error'
 
 
 export const ContainerPrincipal = () => {
@@ -31,7 +32,8 @@ export const ContainerPrincipal = () => {
 
 
   let dispatch = useDispatch()
-let history = useHistory()
+
+  let history = useHistory()
   React.useEffect(() => {
     if (orden === "") return;
     dispatch(sortDogs(orden))
@@ -46,10 +48,6 @@ let history = useHistory()
 
     dispatch(getTemperaments())
     dispatch(fetchRazas())
-
-
-
-
 
   }, [])
 
@@ -169,9 +167,12 @@ let history = useHistory()
     window.location = '#hojaActual'
   }
 
- const goError = () =>{
-  history.push('/error')
- }
+  const goError = () => {
+    history.push('/error')
+
+  }
+
+  console.log(dogsPag)
   return (
     <div className={s.container}>
 
@@ -181,29 +182,62 @@ let history = useHistory()
           <div>
 
             {
-
-              typeof dogsPag[0] === "string"
-                ?
-                <div>
-                  {goError()}
-                </div>
-                :
+              <div>
+                {
+                  typeof dogsPag[0] !== "string"
+                    ?
 
 
-                <div>
-                  <NavBar />
-                  <div className={s.btns}>
-                    <Filter onClickRemoveFilters={onClickRemoveFilters} OnChangeTemperaments={OnChangeTemperaments} OnChangeDogs={OnChangeDogs} temperaments={temperaments} selectT={selectT} />
-                    <Sorter onSelectChange={onSelectChange} orden={orden} />
+                    <div>
 
-                  </div>
 
-                  <Razas lastHandler={lastHandler} firstHandler={firstHandler} razas={dogsPag} cargando={cargando} paginaActual={paginaActual} prevHandler={prevHandler} nextHandler={nextHandler} totalDogs={dogFiltered} onClickbtn={onClickbtn} paginas={pagIndex} />
-                </div>
+                      {
+                        dogFiltered.length === 0
+                          ?
+                          <div className={s.noCreateDogs}>
 
-             
-             
-             
+                           <div> <NavBar /></div>
+
+                                                   <div>
+
+                            <h2>No dogs to show</h2>
+                            <h3>If you want to create one, please click <Link to='/form'>here</Link> </h3>
+                          <button onClick={onClickRemoveFilters}>See all other dogs</button>
+                            </div>
+                          </div>
+                          :
+                          <div>
+                            <NavBar />
+
+                            <div className={s.btns}>
+                              <Filter onClickRemoveFilters={onClickRemoveFilters} OnChangeTemperaments={OnChangeTemperaments} OnChangeDogs={OnChangeDogs} temperaments={temperaments} selectT={selectT} />
+                              <Sorter onSelectChange={onSelectChange} orden={orden} />
+
+                            </div>
+
+                            <Razas lastHandler={lastHandler} firstHandler={firstHandler} razas={dogsPag} cargando={cargando} paginaActual={paginaActual} prevHandler={prevHandler} nextHandler={nextHandler} totalDogs={dogFiltered} onClickbtn={onClickbtn} paginas={pagIndex} />
+
+                          </div>
+
+
+                      }
+
+                    </div>
+                    :
+                    <div className={s.noRace}>
+                      <div> <NavBar />   </div>
+                      <h2>{dogsPag[0]}</h2>
+                      <h3>If you want to create it, please click <Link to='/form'>here</Link> </h3>
+                      <button onClick={onClickRemoveFilters}>See all other dogs</button>
+                    </div>
+
+                }
+
+              </div>
+
+
+
+
             }
           </div>
           :

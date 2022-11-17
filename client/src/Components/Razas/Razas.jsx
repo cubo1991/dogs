@@ -26,7 +26,7 @@ export const Razas = ({ razas, paginaActual, nextHandler, prevHandler, lastHandl
               {dogsRazas}
             </div>
             <h3 className={s.pageNumber}>Page:  {paginaActual}   </h3>
-            <div className={s.btnIndex}>
+            <div className={paginas.length > 3 ? s.btnIndex : s.btnIndexLess}>
              <button className={s.btnHandler} onClick={firstHandler}> First page</button>
               <button className={s.btnHandler} onClick={prevHandler}> Prev</button>  <h5 className={s.index}>{paginas}</h5>   <button className={s.btnHandler} onClick={nextHandler}> Next</button>
               <button className={s.btnHandler} onClick={lastHandler}>Last page</button>

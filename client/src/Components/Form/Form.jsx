@@ -8,25 +8,14 @@ import { useHistory } from 'react-router-dom'
 
 const Form = () => {
   let dispatch = useDispatch()
-let history = useHistory()
+  let history = useHistory()
   React.useEffect(() => {
-
     dispatch(getTemperaments())
   }, [dispatch]
   )
 
   let temperamentos = useSelector(state => state.temperamentos)
-  let [errores, setErrores] = React.useState({
-    ErrorName: false,
-    ErrorHeight_max: false,
-    ErrorHeight_min: false,
-    ErrorWeight_max: false,
-    ErrorWeight_min: false,
-    ErrorLife_span: false,
-    Errortemperamentos: false,
 
-
-  })
   let [finalizado, setFinalizado] = React.useState(false)
 
   let [formRes, setFormRes] = React.useState({
@@ -41,7 +30,7 @@ let history = useHistory()
   }
   )
   function soloNumeros(str) {
-    return /^\d+$/.test(str);
+    return /^[1-9]\d*(\.\d+)?$/.test(str);
 }
   const handleInputChange = (e) => {
     e.preventDefault()
@@ -58,7 +47,7 @@ let history = useHistory()
     }    
     
     else {
-      let converted = e.target.value
+      let converted = Number(e.target.value)
       setFormRes({
         ...formRes,
         [e.target.name]: converted
@@ -83,7 +72,7 @@ let history = useHistory()
     
 
   }
-
+console.log(String(formRes.Height_max).length)
   
   return (
    
@@ -102,51 +91,50 @@ let history = useHistory()
               type="text"
               onChange={handleInputChange}
             />
-             {errores.ErrorName === true ? <p>Please enter your dog's name</p> : ""}
+  
           </div>
 
           <div>
             <label>Minimum height</label>
             <input
-            className={formRes.Height_min.length  < 1  || Number(formRes.Height_min) > Number(formRes.Height_max)  ? s.inpuMandatory : s.inpuAllowed}
+            className={String(formRes.Height_min).length  < 1  || formRes.Height_min > formRes.Height_max  ? s.inpuMandatory : s.inpuAllowed}
               name="Height_min"
               type="text"
               onChange={handleInputChange} />
             
-            {errores.ErrorHeight_min === true? <p>Please enter the minimum height</p> : ""}
-            {String(formRes.Height_min).search( /^\d+$/) === -1 && formRes.Height_min.length !== 0? <p>Only numbers are allowed</p>: "" }
+                       {String(formRes.Height_min).search( /^[1-9]\d*(\.\d+)?$/) === -1 && String(formRes.Height_min).length !== 0? <p>Only numbers are allowed</p>: "" }
           </div>
 
           <div>
             <label> Maximum height</label>
             <input
-             className={formRes.Height_max.length  < 1 || Number(formRes.Height_min) > Number(formRes.Height_max)? s.inpuMandatory : s.inpuAllowed}
+             className={String(formRes.Height_max).length  < 1 || formRes.Height_min > formRes.Height_max? s.inpuMandatory : s.inpuAllowed}
               name="Height_max"
               type="text"
               onChange={handleInputChange} />
-             {errores.ErrorHeight_max === true? <p>Please enter the maximum height</p> : ""}
-            { formRes.Height_max.length > 0 && String(formRes.Height_max).search( /^\d+$/) === -1 && formRes.Height_max.length !== 0? <p>Only numbers are allowed</p>: "" }
-            { formRes.Height_max !== "" && Number(formRes.Height_max) < Number(formRes.Height_min) ? <p>The maximum height cannot be less than the minimum height</p> : ""}
+           
+            { String(formRes.Height_max).length > 0 && String(formRes.Height_max).search( /^[1-9]\d*(\.\d+)?$/) === -1 && String(formRes.Height_max).length !== 0? <p>Only numbers and a dot are allowed</p>: "" }
+            { formRes.Height_max !== "" && formRes.Height_max < formRes.Height_min ? <p>The maximum height cannot be less than the minimum height</p> : ""}
           </div>
           <div>
             <label> Minimum weigth</label>
             <input
-           className={formRes.Weight_min.length  < 1  || Number(formRes.Weight_min) > Number(formRes.Weight_max)? s.inpuMandatory : s.inpuAllowed}
+           className={String(formRes.Weight_min).length  < 1  || formRes.Weight_min > formRes.Weight_max? s.inpuMandatory : s.inpuAllowed}
               name="Weight_min"
               type="text"
               onChange={handleInputChange} />
-             {String(formRes.Weight_min).search( /^\d+$/) === -1 && formRes.Weight_min.length !== 0? <p>Only numbers are allowed</p>: "" }
+             {String(formRes.Weight_min).search( /^[1-9]\d*(\.\d+)?$/) === -1 && String(formRes.Weight_min).length > 0? <p>Only numbers and a dot are allowed</p>: "" }
           </div>
           <div>
             <label> Maximum weight</label>
             <input
-           className={formRes.Weight_max.length  < 1 || Number(formRes.Weight_min) > Number(formRes.Weight_max) ? s.inpuMandatory : s.inpuAllowed}
+           className={String(formRes.Weight_max).length  < 1 || formRes.Weight_min > formRes.Weight_max ? s.inpuMandatory : s.inpuAllowed}
               name="Weight_max"
               type="text"
               onChange={handleInputChange} />
-              {errores.ErrorWeight_max === true? <p>Please enter the maximum weight</p> : ""}
-            { formRes.Weight_max.length > 0 && formRes.Weight_max.search( /^\d+$/) === -1 && formRes.Weight_max.length !== 0? <p>Only numbers are allowed</p>: "" }
-            { formRes.Weight_max !== "" && Number(formRes.Weight_max) < Number(formRes.Weight_min) ?<p>The maximum weight cannot be less than the minimum weight</p> : ""}
+             
+            { String(formRes.Weight_max).length > 0 && String(formRes.Weight_max).search( /^[1-9]\d*(\.\d+)?$/) === -1 && String(formRes.Weight_max).length !== 0? <p>Only numbers are allowed</p>: "" }
+            { formRes.Weight_max !== "" && formRes.Weight_max < formRes.Weight_min ?<p>The maximum weight cannot be less than the minimum weight</p> : ""}
           </div>
           <div>
 
@@ -190,7 +178,7 @@ let history = useHistory()
           </div>
         </form>
        {
-       formRes.Name.length > 0 && soloNumeros(Number(formRes.Height_max)) && formRes.Height_max.length > 0 && soloNumeros(Number(formRes.Height_min)) && formRes.Height_min.length > 0 &&  (soloNumeros(Number(formRes.Weight_max))) && formRes.Weight_max.length > 1  && soloNumeros( Number(formRes.Weight_min)) && formRes.Weight_min.length > 1 && formRes.Height_max >= formRes.Height_min && formRes.Weight_max >= formRes.Weight_min
+       formRes.Name.length > 0 && soloNumeros((formRes.Height_max)) && String(formRes.Height_max).length > 0 && soloNumeros((formRes.Height_min)) && String(formRes.Height_min).length > 0 &&  soloNumeros(formRes.Weight_max) && String(formRes.Weight_max).length > 1  && soloNumeros(formRes.Weight_min) && String(formRes.Weight_min).length > 1 && formRes.Height_max >= formRes.Height_min && formRes.Weight_max >= formRes.Weight_min
         ?
         
        <button className={s.sendBtn} type={"button"} onClick={sendForm}  >Enviar</button>

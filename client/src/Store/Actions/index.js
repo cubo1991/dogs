@@ -20,7 +20,7 @@ export const fetchRazas = () => {
         
       })
     
-      // alert(error);
+      
       
     })
   }
@@ -57,8 +57,10 @@ export const searchRaza = (dog) => {
       dispatch({
         type: SEARCH_RAZAS,
         payload: razas.data
+        
       })
     })
+  
     .catch((error)=>{
       dispatch({
         type: SEARCH_RAZAS,
@@ -86,7 +88,7 @@ export const getTemperaments = () => {
         
       })
       
-      // alert(error)
+      
     })
   }
 

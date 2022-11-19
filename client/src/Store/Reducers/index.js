@@ -16,27 +16,33 @@ const initialState = {
 export default function reducer(state = initialState, action) {
     switch (action.type) {
         case FETCH_RAZAS:
-           if(action.error) {return{
-            ...state,
-            dogsPag: action.error,
-            errorGlobalState: true
-           } }
-            return {
-                ...state,
-                razas: action.payload,
-                dogsFiltered: action.payload,
-                dogsPag: action.payload.slice((state.currentPage-1)*SHOW_DOGS,state.currentPage*SHOW_DOGS),
-                cargando: false,
-                
+
+            
+           if(action.error) {return{ ...state,  dogsPag: action.error,  errorGlobalState: true  } }
+            if(state.razas.length < 1) {
+                return {
+                    ...state,
+                    razas: action.payload,
+                    dogsFiltered: action.payload,
+                    dogsPag: action.payload.slice((state.currentPage-1)*SHOW_DOGS,state.currentPage*SHOW_DOGS),
+                    cargando: false,
+                    
+    
+                }
 
             }
+            else{ 
+                return{
+            ...state,
+            
+        }}
         case SEARCH_RAZAS:
      if (typeof action.payload[0] === "string")
      {
         return {
             ...state,
            
-            dogsFiltered: state.razas,
+            dogsFiltered: action.payload,
             dogsPag: action.payload.slice((state.currentPage-1)*SHOW_DOGS,state.currentPage*SHOW_DOGS),
             currentPage: 1
         }

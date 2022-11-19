@@ -11,7 +11,9 @@ export const SearchBar = () => {
     const onSubmit = (e) => {
         e.preventDefault();
         dispatch(searchRaza(search))
-        history.push('/home')
+        setTimeout(()=>{
+          history.push('/home')
+        }, 2000)
         
     }
     const onInputChange = (e) => {

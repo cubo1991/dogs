@@ -113,7 +113,7 @@ console.log(String(formRes.Height_max).length)
               type="text"
               onChange={handleInputChange} />
            
-            { String(formRes.Height_max).length > 0 && String(formRes.Height_max).search( /^[1-9]\d*(\.\d+)?$/) === -1 && String(formRes.Height_max).length !== 0? <p>Only numbers and a dot are allowed</p>: "" }
+            { String(formRes.Height_max).search( /^[1-9]\d*(\.\d+)?$/) === -1 && String(formRes.Height_max).length !== 0? <p>Only numbers and a dot are allowed</p>: "" }
             { formRes.Height_max !== "" && formRes.Height_max < formRes.Height_min ? <p>The maximum height cannot be less than the minimum height</p> : ""}
           </div>
           <div>
@@ -133,7 +133,7 @@ console.log(String(formRes.Height_max).length)
               type="text"
               onChange={handleInputChange} />
              
-            { String(formRes.Weight_max).length > 0 && String(formRes.Weight_max).search( /^[1-9]\d*(\.\d+)?$/) === -1 && String(formRes.Weight_max).length !== 0? <p>Only numbers are allowed</p>: "" }
+            {String(formRes.Weight_max).search( /^[1-9]\d*(\.\d+)?$/) === -1 && String(formRes.Weight_max).length !== 0? <p>Only numbers are allowed</p>: "" }
             { formRes.Weight_max !== "" && formRes.Weight_max < formRes.Weight_min ?<p>The maximum weight cannot be less than the minimum weight</p> : ""}
           </div>
           <div>

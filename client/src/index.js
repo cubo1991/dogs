@@ -6,6 +6,10 @@ import reportWebVitals from './reportWebVitals';
 import {Provider} from 'react-redux'
 import store from './Store'
 import { BrowserRouter as Router } from 'react-router-dom';
+import axios from 'axios'
+
+// axios.defaults.baseURL= 'http://localhost:3001/api'
+axios.defaults.baseURL= 'https://dogs-production-4f84.up.railway.app/api'
 
 ReactDOM.render(
  

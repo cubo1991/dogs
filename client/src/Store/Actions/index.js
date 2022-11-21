@@ -3,7 +3,7 @@ import { NUMBER_PAGE, SEARCH_RAZAS, TEMPERAMENTS, SORT_DOGS, FILTER_DOGSTEMPERAM
 
 export const fetchRazas = () => {
     return function (dispatch) {
-        axios.get('http://localhost:3001/api/dogs/')
+        axios.get('/dogs/')
         .then((razas) =>{
             dispatch({
                 type: FETCH_RAZAS,
@@ -31,7 +31,7 @@ export const fetchRazas = () => {
 export const getDetails = (id) => {
 
   return function (dispatch) {
-    axios.get('http://localhost:3001/api/dogs/' + id)
+    axios.get('/dogs/' + id)
     .then((raza) => {
       dispatch({
         type: GET_DETAILS,
@@ -52,7 +52,7 @@ export const getDetails = (id) => {
 
 export const searchRaza = (dog) => {
   return function(dispatch) {
-    axios.get('http://localhost:3001/api/dogs?name=' + dog)
+    axios.get('/dogs?name=' + dog)
     .then((razas) => {
       dispatch({
         type: SEARCH_RAZAS,
@@ -74,7 +74,7 @@ export const searchRaza = (dog) => {
 
 export const getTemperaments = () => {
   return function(dispatch) {
-     axios.get('http://localhost:3001/api/temperaments')
+     axios.get('/temperaments')
     .then((temperaments) => {
       dispatch({
         type: TEMPERAMENTS,
@@ -118,7 +118,7 @@ export const numberPage = (payload) => {
 export const postDog = (payload) => {
 
   return function(dispatch) {
-     axios.post('http://localhost:3001/api/dogs', {
+     axios.post('/dogs', {
       Name: payload.Name,
       Height_max: payload.Height_max,
       Height_min: payload.Height_min,
@@ -130,7 +130,7 @@ export const postDog = (payload) => {
     }
    
     )
-    axios.get('http://localhost:3001/api/dogs')
+    axios.get('/dogs')
     .then((razas) =>
      dispatch({
       type: POST_DOGS,
@@ -148,7 +148,7 @@ export const postDog = (payload) => {
 export const deleteDog = (id) => {
 
   return function(dispatch) {
-     axios.delete('http://localhost:3001/api/dogs/' + id)
+     axios.delete('/dogs/' + id)
     
     .then((response) => {
       console.log(response)

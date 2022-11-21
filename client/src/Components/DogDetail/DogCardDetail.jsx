@@ -20,7 +20,7 @@ export const DogCardDetail = ({ name, image, temperaments, weightMin, weightMax,
         <div className={s.card}>
           <img src={image} alt={name} />
           <div className={s.info}>
-            <h3>Weight Min: {weightMin} kg</h3>
+            <h3>Weight Min: {weightMin} kg</h3> 
             <h3>Weight Max: {weightMax} kg</h3>
             <h3>Height Min: {heightMin} cm </h3>
             <h3>Height Max: {heightMax} cm </h3>

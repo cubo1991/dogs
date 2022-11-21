@@ -4,6 +4,7 @@ import { getTemperaments, postDog } from '../../Store/Actions'
 import { NavBar } from '../NavBar/NavBar'
 import s from '../Form/Form.module.css'
 import { useHistory } from 'react-router-dom'
+import { Error } from '../Eror/Error'
 
 
 const Form = () => {
@@ -15,6 +16,7 @@ const Form = () => {
   )
 
   let temperamentos = useSelector(state => state.temperamentos)
+  let error = useSelector((state) => state.errorGlobalState)
 
   let [finalizado, setFinalizado] = React.useState(false)
 
@@ -67,14 +69,14 @@ const Form = () => {
     setFinalizado(true)
     setTimeout(()=>{
       history.push('/home')
-    }, 5000)
+    }, 2000)
    
     
 
   }
-console.log(String(formRes.Height_max).length)
-  
-  return (
+
+  if(!error)
+ { return (
    
     <div>
        <NavBar/>
@@ -102,7 +104,7 @@ console.log(String(formRes.Height_max).length)
               type="text"
               onChange={handleInputChange} />
             
-                       {String(formRes.Height_min).search( /^[1-9]\d*(\.\d+)?$/) === -1 && String(formRes.Height_min).length !== 0? <p>Only numbers are allowed</p>: "" }
+                       {String(formRes.Height_min).search( /^[1-9]\d*(\.\d+)?$/) === -1 && String(formRes.Height_min).length !== 0? <p>Only numbers and a dot are allowed</p>: "" }
           </div>
 
           <div>
@@ -133,7 +135,7 @@ console.log(String(formRes.Height_max).length)
               type="text"
               onChange={handleInputChange} />
              
-            {String(formRes.Weight_max).search( /^[1-9]\d*(\.\d+)?$/) === -1 && String(formRes.Weight_max).length !== 0? <p>Only numbers are allowed</p>: "" }
+            {String(formRes.Weight_max).search( /^[1-9]\d*(\.\d+)?$/) === -1 && String(formRes.Weight_max).length !== 0? <p>Only numbers and a dot are allowed</p>: "" }
             { formRes.Weight_max !== "" && formRes.Weight_max < formRes.Weight_min ?<p>The maximum weight cannot be less than the minimum weight</p> : ""}
           </div>
           <div>
@@ -176,8 +178,7 @@ console.log(String(formRes.Height_max).length)
             
             <button onClick={removetemperamentos}> Borrar todos</button>
           </div>
-        </form>
-       {
+          {
        formRes.Name.length > 0 && soloNumeros((formRes.Height_max)) && String(formRes.Height_max).length > 0 && soloNumeros((formRes.Height_min)) && String(formRes.Height_min).length > 0 &&  soloNumeros(formRes.Weight_max) && String(formRes.Weight_max).length > 1  && soloNumeros(formRes.Weight_min) && String(formRes.Weight_min).length > 1 && formRes.Height_max >= formRes.Height_min && formRes.Weight_max >= formRes.Weight_min
         ?
         
@@ -188,16 +189,20 @@ console.log(String(formRes.Height_max).length)
        <p>Please complete all fields in red</p>
        </div>
       }
+        </form>
+      
       </div>
       :
 
-      <h2 className={s.dogFinish}>Dog successfully created! Redirecting in 5 seconds</h2>
+      <h2 className={s.dogFinish}>Dog successfully created! Redirecting now</h2>
 
 }
 
 
     </div>
-  )
+  )} else {
+    <Error/>
+  }
 }
 
 export default Form

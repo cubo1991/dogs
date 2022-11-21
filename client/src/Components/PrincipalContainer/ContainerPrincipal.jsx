@@ -5,7 +5,7 @@ import { Razas } from '../Razas/Razas'
 import { Loading } from '../Loading/Loading'
 
 import { useDispatch, useSelector } from 'react-redux'
-import { numberPage, fetchRazas, getTemperaments, filterDogs, filterDogsTemperaments, sortDogs, paginationDogs } from '../../Store/Actions'
+import { numberPage, fetchRazas, getTemperaments, filterDogs, filterDogsTemperaments, sortDogs, paginationDogs, deleteDog } from '../../Store/Actions'
 import { SHOW_DOGS } from '../../constantes'
 import { NavBar } from '../NavBar/NavBar'
 import s from './ContainerPrincipal.module.css'
@@ -29,9 +29,6 @@ export const ContainerPrincipal = () => {
   let [activadorT, setActivadorT] = React.useState(false)
   let [activadorD, setActivadorD] = React.useState(false)
 
-
-
-
   let dispatch = useDispatch()
 
   let history = useHistory()
@@ -50,7 +47,7 @@ export const ContainerPrincipal = () => {
     dispatch(getTemperaments())
     dispatch(fetchRazas())
 
-  }, [])
+  }, [dispatch, ])
 
 
 
@@ -168,10 +165,13 @@ export const ContainerPrincipal = () => {
     window.location = '#hojaActual'
   }
 
-  const goError = () => {
-    history.push('/error')
+  const onClickDelete = (e) => {
+    
+dispatch(deleteDog(e))
 
   }
+
+
 
   if(!error)
   {return (
@@ -216,7 +216,7 @@ export const ContainerPrincipal = () => {
 
                             </div>
 
-                            <Razas lastHandler={lastHandler} firstHandler={firstHandler} razas={dogsPag} cargando={cargando} paginaActual={paginaActual} prevHandler={prevHandler} nextHandler={nextHandler} totalDogs={dogFiltered} onClickbtn={onClickbtn} paginas={pagIndex} />
+                            <Razas lastHandler={lastHandler} firstHandler={firstHandler} razas={dogsPag} cargando={cargando} paginaActual={paginaActual} prevHandler={prevHandler} nextHandler={nextHandler} totalDogs={dogFiltered} onClickbtn={onClickbtn} paginas={pagIndex} onClickDelete={onClickDelete} />
 
                           </div>
 
@@ -250,7 +250,7 @@ export const ContainerPrincipal = () => {
   )} else {
 
 return(
- goError()
+ <Error/>
 )
   }
 }

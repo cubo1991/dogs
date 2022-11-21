@@ -7,16 +7,15 @@ import s from './Error.module.css'
 export const Error = () => {
   
   let dogsPag = useSelector((state) => state.dogsPag)
-  console.log(typeof dogsPag[0])
+  
   return (
     <div className={s.container}>
         
        <img className={s.imagen} src={dog404} alt={"Error"} />
 
        <div>
-       <Link to={'/home'}>
-        <h2>Back to home</h2>
-        </Link>
+        <h2>{dogsPag[0].message}</h2>
+        <h3>{dogsPag[0].stack}</h3>
         </div>
 
     </div>

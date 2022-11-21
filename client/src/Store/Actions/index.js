@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { NUMBER_PAGE, SEARCH_RAZAS, TEMPERAMENTS, SORT_DOGS, FILTER_DOGSTEMPERAMENTS, FILTER_DOGS, PAG_DOGS,  GET_DETAILS, FETCH_RAZAS} from '../../constantes'
+import { NUMBER_PAGE, SEARCH_RAZAS, TEMPERAMENTS, SORT_DOGS, FILTER_DOGSTEMPERAMENTS, FILTER_DOGS, PAG_DOGS,  GET_DETAILS, FETCH_RAZAS, POST_DOGS, DELETE_DOGS} from '../../constantes'
 
 export const fetchRazas = () => {
     return function (dispatch) {
@@ -19,7 +19,7 @@ export const fetchRazas = () => {
         error: [error],
         
       })
-    
+      console.log(error)
       
       
     })
@@ -45,7 +45,7 @@ export const getDetails = (id) => {
         payload: [error],
         
       })
-      // alert(error)
+      console.log(error)
     })
   }
 }
@@ -67,14 +67,14 @@ export const searchRaza = (dog) => {
         payload: [error],
         
       })
-      // alert(error)
+      console.log(error)
     })
   }
 }
 
 export const getTemperaments = () => {
-  return async function(dispatch) {
-    await axios.get('http://localhost:3001/api/temperaments')
+  return function(dispatch) {
+     axios.get('http://localhost:3001/api/temperaments')
     .then((temperaments) => {
       dispatch({
         type: TEMPERAMENTS,
@@ -87,12 +87,10 @@ export const getTemperaments = () => {
         payload: [error],
         
       })
-      
+      console.log(error)
       
     })
   }
-
- 
 
 }
 
@@ -119,8 +117,8 @@ export const numberPage = (payload) => {
 
 export const postDog = (payload) => {
 
-  return async function() {
-    await axios.post('http://localhost:3001/api/dogs', {
+  return function(dispatch) {
+     axios.post('http://localhost:3001/api/dogs', {
       Name: payload.Name,
       Height_max: payload.Height_max,
       Height_min: payload.Height_min,
@@ -129,10 +127,37 @@ export const postDog = (payload) => {
       Life_span: payload.Life_span,
       NameT: payload.temperamentos,
       Img: payload.Img
+    }
+   
+    )
+    axios.get('http://localhost:3001/api/dogs')
+    .then((razas) =>
+     dispatch({
+      type: POST_DOGS,
+      payload: razas.data[razas.data.length-1]
+    }))       
+    .catch((error) => {
+     console.log(error)
+      alert("Something went wrong...")
     })
+   
+  }
+  
+}
+
+export const deleteDog = (id) => {
+
+  return function(dispatch) {
+     axios.delete('http://localhost:3001/api/dogs/' + id)
+    
     .then((response) => {
-     console.log(response)
-      // alert("Dog successfully created!")
+      console.log(response)
+          dispatch({
+        type: DELETE_DOGS,
+        payload: ["Dog erased successfully"],        
+        payloadId:id
+        
+      })
 
     })
     .catch((error) => {
@@ -141,3 +166,4 @@ export const postDog = (payload) => {
     })
   }
 }
+

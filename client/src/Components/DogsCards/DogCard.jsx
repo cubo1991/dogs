@@ -2,7 +2,7 @@ import React from 'react'
 import s from './DogsCards.module.css'
 import { Link } from 'react-router-dom'
 
-export const DogCard = ({name, image, temperaments, weightMin, weightMax, id, key}) => {
+export const DogCard = ({name, image, temperaments, weightMin, weightMax, id, key, onClickDelete}) => {
 
 
 
@@ -22,6 +22,16 @@ export const DogCard = ({name, image, temperaments, weightMin, weightMax, id, ke
             <h3>Weight Max: {weightMax} kg</h3>
             </div>
             <h3 className={s.temperaments}>Temperaments: <ul>{temperaments[0].map(t => { return ( <li>{t}</li>) }) } </ul></h3>
+            {
+              id.length > 5
+              ?
+              <button onClick={(e) => onClickDelete(id)}>Delete</button>
+              :
+              ""
+
+            }
+            
+           
             
             
             

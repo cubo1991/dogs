@@ -7,7 +7,12 @@
 
 .imagen{
    position: relative;
-    width: 26.5rem;
-    height: 26.5rem;
+    width: 24.5rem;
+    height: 24.5rem;
    
+}
+.container h3 {
+position: relative;
+font-size: small;
+bottom: 3rem;
 }

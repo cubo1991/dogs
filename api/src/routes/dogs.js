@@ -199,7 +199,7 @@ router.get('/:idRaza', async (req, res, next) => {
                     
                 }
                 res.send(dogsData) } else {
-                res.status(404).send("Esta página no existe")
+                res.status(200).send("Esta página no existe")
             }
         }
     } catch (error) {
@@ -254,5 +254,47 @@ router.post('/', async (req, res, next) => {
     }
 
 })
+router.delete('/:idRaza', async (req, res, next) => {
+    const {idRaza} = req.params
+    try {
+    await Raza.destroy({
+        where: {
+            Id: idRaza
+        }
+    })
+
+    res.status(200).send("Perro borado con éxito")
+    } catch (error) {
+        next(error)
+    }
+ 
+})
+
+router.put('/:idRaza', async (req, res, next) => {
+    const {idRaza} = req.params
+    const {Name, Height_max, Height_min, Weight_max, Weight_min, Life_span, temperamentos} = req.body
+    try {
+    await Raza.update({
+    Name: Name,
+    Height_max: Height_max,
+    Height_min: Height_min,
+    Weight_max: Weight_max,
+    Weight_min: Weight_min,
+    Life_span: Life_span,
+    temperamentos: temperamentos
+
+    }, {
+        where: {
+            Id: idRaza
+        }
+    })
+
+    res.status(200).send("Perro editado con éxito")
+    } catch (error) {
+        next(error)
+    }
+
+})
+
 
 module.exports = router;

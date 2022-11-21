@@ -1,4 +1,4 @@
-import { NUMBER_PAGE, SHOW_DOGS, FETCH_RAZAS, FILTER_DOGSTEMPERAMENTS, SEARCH_RAZAS, SORT_DOGS, TEMPERAMENTS, FILTER_DOGS, PAG_DOGS, GET_DETAILS } from "../../constantes"
+import { NUMBER_PAGE, SHOW_DOGS, FETCH_RAZAS, FILTER_DOGSTEMPERAMENTS, SEARCH_RAZAS, SORT_DOGS, TEMPERAMENTS, FILTER_DOGS, PAG_DOGS, GET_DETAILS, DELETE_DOGS, POST_DOGS } from "../../constantes"
 
 const initialState = {
 
@@ -122,7 +122,7 @@ export default function reducer(state = initialState, action) {
             filter = dogs.filter(perro=> String(perro.ID).length < SHOW_DOGS)
             }
             if(action.payload === "DB"){
-                filter = dogs.filter(perro => perro.ID.length > SHOW_DOGS  )
+                filter = dogs.filter(perro => String(perro.ID).length > SHOW_DOGS  )
                 }
             if(action.payload === "removeFilters"){ filter = state.razas}
 
@@ -157,6 +157,25 @@ export default function reducer(state = initialState, action) {
                     ...state,
                     currentPage: action.payload
                 }   
+
+            case DELETE_DOGS:
+                
+                
+                return {
+                    ...state,
+                    dogsPag: action.payload,
+                    razas: state.razas.filter(dog => dog.ID !== action.payloadId)
+                }
+
+             case POST_DOGS:
+           
+            //   console.log(action.payload)
+            //   console.log(state.razas[0])
+              state.razas.push(action.payload)
+                return{
+                    ...state,
+                    dogsFiltered: [...state.razas]
+                }       
            
 
 

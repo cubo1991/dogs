@@ -9,3 +9,5 @@ export const GET_DETAILS = "GET_DETAILS"
 export const SHOW_DOGS = 8
 export const NUMBER_PAGE = "NUMBER_PAGE"
 export const POST_DOGS= "POST_DOGS"
+export const EDIT_DOGS = "EDIT_DOGS"
+export const DELETE_DOGS = "DELETE_DOGS"

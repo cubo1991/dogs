@@ -8,6 +8,30 @@ const router = Router();
 
 
 
+router.get('/solo', async (req, res, next) => {
+
+    try {
+        let razaApi = await axios.get (`https://api.thedogapi.com/v1/breeds?api_key=${API_KEY}`)
+
+        let razasdeApi = razaApi.data.map((info) => {     
+                      
+            return {
+               
+                Name: info.name,              
+
+            }
+        
+    }
+    )
+    res.send(razasdeApi)
+
+    } catch (error) {
+        next(error)
+    }
+
+}
+)
+
 router.get('/', async (req, res, next) => {
     const { name } = req.query
     try {
@@ -263,7 +287,7 @@ router.delete('/:idRaza', async (req, res, next) => {
         }
     })
 
-    res.status(200).send("Perro borado con éxito")
+    res.status(200).send("Dog successfully erased")
     } catch (error) {
         next(error)
     }

@@ -179,7 +179,7 @@ const Form = () => {
             <button onClick={removetemperamentos}> Borrar todos</button>
           </div>
           {
-       formRes.Name.length > 0 && soloNumeros((formRes.Height_max)) && String(formRes.Height_max).length > 0 && soloNumeros((formRes.Height_min)) && String(formRes.Height_min).length > 0 &&  soloNumeros(formRes.Weight_max) && String(formRes.Weight_max).length > 1  && soloNumeros(formRes.Weight_min) && String(formRes.Weight_min).length > 1 && formRes.Height_max >= formRes.Height_min && formRes.Weight_max >= formRes.Weight_min
+       formRes.Name.length > 0 && soloNumeros((formRes.Height_max)) && String(formRes.Height_max).length > 0 && soloNumeros((formRes.Height_min)) && String(formRes.Height_min).length > 0 &&  soloNumeros(formRes.Weight_max) && String(formRes.Weight_max).length > 0  && soloNumeros(formRes.Weight_min) && String(formRes.Weight_min).length > 0 && formRes.Height_max >= formRes.Height_min && formRes.Weight_max >= formRes.Weight_min
         ?
         
        <button className={s.sendBtn} type={"button"} onClick={sendForm}  >Enviar</button>

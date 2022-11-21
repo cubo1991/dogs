@@ -3,7 +3,7 @@
     display: flex;
     justify-content: space-between;
     background-color: rgba(255, 228, 196, 0.61);
-    z-index: 99999;
+    z-index: 99998;
     position:fixed;
     width: 100vw;
     

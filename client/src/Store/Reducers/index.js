@@ -169,8 +169,6 @@ export default function reducer(state = initialState, action) {
 
              case POST_DOGS:
            
-            //   console.log(action.payload)
-            //   console.log(state.razas[0])
               state.razas.push(action.payload)
                 return{
                     ...state,

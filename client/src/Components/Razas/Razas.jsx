@@ -14,13 +14,13 @@ export const Razas = ({ razas, paginaActual, nextHandler, prevHandler, lastHandl
 
 
 
-  return (<div className={s.container}>
+  return (<div  id='hojaActual' className={s.container}>
 
     {typeof razas !== 'string'
       ?
       <div >
         {
-          <div id='hojaActual' >
+          <div>
             
             <h3 className={s.pageNumber}>Page: {paginaActual} </h3>
           

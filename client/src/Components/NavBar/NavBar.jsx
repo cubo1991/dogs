@@ -10,7 +10,7 @@ export const NavBar = () => {
       <div className={s.navBar}>
       <Link to='/home'>
 
-       <img className={s.logo} src={icono}/>
+       <img className={s.logo} src={icono} alt="Ícono"/>
         </Link>
       </div>
 <div className={s.navBar}>

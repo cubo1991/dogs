@@ -11,7 +11,7 @@ import { NavBar } from '../NavBar/NavBar'
 import s from './ContainerPrincipal.module.css'
 
 
-import { Link, useHistory } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { Error } from '../Eror/Error'
 
 
@@ -31,16 +31,16 @@ export const ContainerPrincipal = () => {
 
   let dispatch = useDispatch()
 
-  let history = useHistory()
+  
   React.useEffect(() => {
     if (orden === "") return;
     dispatch(sortDogs(orden))
 
-  }, [orden])
+  }, [orden, dispatch])
   React.useEffect(() => {
     dispatch(paginationDogs(paginaActual))
 
-  }, [paginaActual])
+  }, [paginaActual, dispatch])
 
   React.useEffect(() => {
 

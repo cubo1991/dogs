@@ -24,7 +24,7 @@ export const Detail = (props) => {
   return (
     <div>
       {
-       props.match.params.id == razaDetalle.ID
+       props.match.params.id === String(razaDetalle.ID)
        ?
 <div>
 {<DogCardDetail name={razaDetalle.Name} image={razaDetalle.Img} temperaments={razaDetalle.temperamentos} weightMax={razaDetalle.Weight_max} weightMin={razaDetalle.Weight_min} key={razaDetalle.ID} heightMin={razaDetalle.Height_min} heightMax={razaDetalle.Height_max} lifeSpan={razaDetalle.Life_span}
